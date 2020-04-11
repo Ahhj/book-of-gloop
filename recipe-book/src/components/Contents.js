@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import {
   BrowserRouter as Router,
   Switch,
@@ -7,6 +7,7 @@ import {
 } from "react-router-dom";
 import Page from './Page'
 import Recipe from './Recipe'
+import Home from './Home'
 import './Contents.css'
 
 export default function Contents(props) {
@@ -32,8 +33,11 @@ export default function Contents(props) {
         />
       </Route>
   );
-  // Append route to contents page.
-  routes = [<Route exact path={"/Contents"}><Page name={"Contents"} content={<ol>{links}</ol>}/></Route>].concat(routes)
+  // Append home and contents to routes.
+  routes = [
+    <Route exact path={"/"}><Home /></Route>,
+    <Route exact path={"/Contents"}><Page name={"Contents"} content={<ol>{links}</ol>}/></Route>
+  ].concat(routes)
   return (
     <Router>
       <div>

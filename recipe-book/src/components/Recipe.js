@@ -45,11 +45,6 @@ export default class Recipe extends Component {
   }
 
   render() {
-    // const linkStyle = {
-    //   textDecoration: 'none',
-    //   color: 'purple',
-    //   marging: '10px'
-    // }
     return (
       <div className="Recipe">
         <Page name={this.props.name} content={this.renderContent()} />
