@@ -7,7 +7,9 @@ import Page from './Page'
 import './Recipe.css'
 
 function Ingredients(props) {
-  const ingredients = props.content.map((item) => <li>{item}</li>);
+  const ingredients = props.content.map((item) =>
+    <li>{`${item.name} (${item.quantity})`}</li>
+  );
   return (
     <div className='column'>
       <h2>{'Ingredients'}</h2>
@@ -36,10 +38,18 @@ function Instructions(props) {
 
 export default class Recipe extends Component {
   renderContent() {
+    const serves = `Serves: ${this.props.servings ? this.props.servings : ''}`;
+    const time = `Time: ${this.props.time ? this.props.time : ''}`;
+    const tags = `Tags: ${this.props.tags ? this.props.tags : ''}`;
     return (
-      <div className='row'>
-        <Ingredients content={this.props.ingredients}/>
-        <Instructions content={this.props.instructions}/>
+      <div>
+        <h4>{serves}</h4>
+        <h4>{time}</h4>
+        <h4>{tags}</h4>
+        <div className='row'>
+          <Ingredients content={this.props.ingredients}/>
+          <Instructions content={this.props.instructions}/>
+        </div>
       </div>
     )
   }
