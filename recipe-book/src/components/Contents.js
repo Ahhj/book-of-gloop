@@ -33,7 +33,7 @@ export default function Contents(props) {
           time={recipe.time}
           tags={recipe.tags}
           notes={recipe.notes}
-          serves={recipe.serves}
+          servings={recipe.servings}
         />
       </Route>
   );

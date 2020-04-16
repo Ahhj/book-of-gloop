@@ -22,8 +22,8 @@ class App extends Component {
           recipes.forEach(
             recipe => {
               recipe.name = recipe.Designation;
-              recipe.tags = recipe.Descriptors;
-              recipe.time = recipe.Time;
+              recipe.tags = recipe.Descriptors.split("/");
+              recipe.time = recipe.Span;
               recipe.servings = recipe.Volume;
               recipe.instructions = recipe.Directions.split("/");
               recipe.ingredients = recipe.Components.split("/").map(item =>
@@ -38,7 +38,6 @@ class App extends Component {
               );
             }
           );
-          console.log(data)
           this.setState({
             recipes: recipes
           })
