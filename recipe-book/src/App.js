@@ -14,39 +14,33 @@ class App extends Component {
   }
   componentDidMount() {
     Tabletop.init({
-      key: '1WAfPfWnmHzPK02RQqWF3D7lQMUdaj00amfAS6ABRoJc',
+      key: 'https://docs.google.com/spreadsheets/d/1xxwUBoZ1bm2O_0eX4Ltz5P9SDq8-XiCQIM28VdOtOAU/edit?usp=sharing',
       callback: data =>
         {
-          var recipeData = data.Recipes.elements;
-          const instructionData = data.Instructions.elements;
-          const ingredientData = data.Ingredients.elements;
+          var recipes = data.Responses.elements;
           // Attach instructions & ingredients to recipes.
-          recipeData.forEach(
+          recipes.forEach(
             recipe => {
-              recipe.name = recipe.Title;
-              recipe.tags = recipe.Tags;
+              recipe.name = recipe.Designation;
+              recipe.tags = recipe.Descriptors;
               recipe.time = recipe.Time;
-              //recipe.servings = recipe.servings;
-              recipe.instructions = instructionData.filter(
-                instruction => instruction.RecipeId === recipe.Id
-              ).map(
-                instruction => instruction.Description
-              );
-              recipe.ingredients = ingredientData.filter(
-                ingredient => ingredient.RecipeId === recipe.Id
-              ).map(
-                ingredient => {
+              recipe.servings = recipe.Volume;
+              recipe.instructions = recipe.Directions.split("/");
+              recipe.ingredients = recipe.Components.split("/").map(item =>
+                {
+                  const name = item.match(/(.*?)(?![^\(])/g);
+                  const quantity = item.match(/\(([^()]+)\)/);
                   return {
-                    name: ingredient.Name,
-                    quantity: ingredient.Quantity
+                    name: name ? name[0] : '',
+                    quantity: quantity ? quantity[0] : '',
                   }
                 }
               );
             }
           );
-          console.log(recipeData);
+          console.log(data)
           this.setState({
-            recipes: recipeData
+            recipes: recipes
           })
         },
       simpleSheet: false,

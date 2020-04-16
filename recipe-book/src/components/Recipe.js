@@ -8,7 +8,7 @@ import './Recipe.css'
 
 function Ingredients(props) {
   const ingredients = props.content.map((item) =>
-    <li>{`${item.name} (${item.quantity})`}</li>
+    <li>{`${item.name} ${item.quantity}`}</li>
   );
   return (
     <div className='column'>
