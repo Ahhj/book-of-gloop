@@ -30,6 +30,10 @@ export default function Contents(props) {
           name={recipe.name}
           ingredients={recipe.ingredients}
           instructions={recipe.instructions}
+          time={recipe.time}
+          tags={recipe.tags}
+          notes={recipe.notes}
+          serves={recipe.serves}
         />
       </Route>
   );
