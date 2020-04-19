@@ -12,23 +12,27 @@ import cocktail from './images/cocktail.jpg';
 import dfo from './images/dfo.jpg';
 import kitchen from './images/kitchen.jpg';
 
+
+
 export default function Home() {
+
+
   return (
     <div className="Home">
-      <div className='row'>
+      <div className='row' >
         <div className='col'><img src={baking} /></div>
         <div className='col'><img src={christmas} /></div>
         <div className='col'><img src={clams} /></div>
       </div>
-      <Page name={Home} content={<h1>The Gloop Collection</h1>} />
+      <h1>The Gloop Collection</h1>
+      <div className='row'>
+        <a href={'/Contents'}>{'Click to enter'}</a>
+      </div>
       <div className='row'>
         <div className='col'><img src={cocktail} /></div>
         <div className='col'><img src={dfo} /></div>
         <div className='col'><img src={kitchen} /></div>
       </div>
-      <Route>
-        <Link to={'/Contents'}>{'Go to contents'}</Link>
-      </Route>
     </div>
   );
 }

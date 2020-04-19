@@ -21,6 +21,7 @@ export default function Contents(props) {
           {recipe.name}
         </Link>
       </li>
+
   );
 
   var routes = props.recipes.map(
@@ -29,6 +30,7 @@ export default function Contents(props) {
         <Recipe
           name={recipe.name}
           ingredients={recipe.ingredients}
+          image={recipe.image}
           instructions={recipe.instructions}
           time={recipe.time}
           tags={recipe.tags}
@@ -55,5 +57,9 @@ export default function Contents(props) {
         <Switch>{routes}</Switch>
       </div>
     </Router>
+
+
+
+
   );
 }
