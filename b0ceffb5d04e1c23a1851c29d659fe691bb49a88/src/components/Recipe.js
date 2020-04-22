@@ -10,14 +10,8 @@ function Ingredients(props) {
   const ingredients = props.content.map((item) =>
     <li>{`${item.name} ${item.quantity}`}</li>
   );
-  const servings = `Serves: ${props.servings ? props.servings : ''}`;
-  const time = `Time: ${props.time ? props.time : ''}`;
-  const tags = `Tags: ${props.tags ? props.tags : ''}`;
   return (
     <div className='column'>
-    <h4>{servings}</h4>
-    <h4>{time}</h4>
-    <h4>{tags}</h4>
       <h2>{'Ingredients'}</h2>
       <ul>
         {
@@ -29,14 +23,14 @@ function Ingredients(props) {
 }
 
 function Instructions(props) {
-  const instructions = props.instructions.map((item) => <li>{item}</li>);
-  const imge = props.image;
+  const instructions = props.content.map((item) => <li>{item}</li>);
   return (
     <div className='column'>
-      <img src={imge} alt={imge} />
       <h2>{'Instructions'}</h2>
       <ol>
-        {instructions}
+        {
+          instructions
+        }
       </ol>
     </div>
   )
@@ -44,11 +38,17 @@ function Instructions(props) {
 
 export default class Recipe extends Component {
   renderContent() {
+    const servings = `Serves: ${this.props.servings ? this.props.servings : ''}`;
+    const time = `Time: ${this.props.time ? this.props.time : ''}`;
+    const tags = `Tags: ${this.props.tags ? this.props.tags : ''}`;
     return (
       <div>
+        <h4>{servings}</h4>
+        <h4>{time}</h4>
+        <h4>{tags}</h4>
         <div className='row'>
-          <Ingredients content={this.props.ingredients} servings={this.props.servings} time={this.props.time} tags={this.props.tags}/>
-          <Instructions instructions={this.props.instructions} image={this.props.image}/>
+          <Ingredients content={this.props.ingredients}/>
+          <Instructions content={this.props.instructions}/>
         </div>
       </div>
     )
