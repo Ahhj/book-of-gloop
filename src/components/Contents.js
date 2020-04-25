@@ -1,14 +1,14 @@
 import React from "react";
 import {
-  BrowserRouter as Router,
   Switch,
   Route,
   Link
 } from "react-router-dom";
-import Page from './Page'
 import Recipe from './Recipe'
 import Home from './Home'
 import './Contents.css'
+import PrivateRoute from "./PrivateRoute";
+import NavBar from "./NavBar";
 
 export default function Contents(props) {
   const links = props.recipes.map(
@@ -26,40 +26,45 @@ export default function Contents(props) {
 
   var routes = props.recipes.map(
     (recipe) =>
-      <Route exact path={`/${recipe.name}`}>
-        <Recipe
-          name={recipe.name}
-          ingredients={recipe.ingredients}
-          image={recipe.image}
-          instructions={recipe.instructions}
-          time={recipe.time}
-          tags={recipe.tags}
-          notes={recipe.notes}
-          servings={recipe.servings}
-        />
-      </Route>
+      {
+        console.log(recipe);
+        const path = `/${recipe.name}`;
+        const component = () => <Recipe {...recipe}></Recipe>
+        return <PrivateRoute
+          path={path}
+          component={component}
+        >
+        </PrivateRoute>
+      }
   );
   // Append home and contents to routes.
   routes = [
-    <Route exact path={"/"}><Home /></Route>,
-    <Route exact path={"/Contents"}><Page name={"Contents"} content={<ol>{links}</ol>}/></Route>
+    <Route exact path={"/"}><Home/></Route>,
+    <PrivateRoute
+      path={"/Contents"}
+    >
+    {
+      <div>
+        <div>
+          <ol>{links}</ol>
+        </div>
+        <div>
+        <form action="https://docs.google.com/forms/d/e/1FAIpQLSc0iCXAFZ6UH9n3vkWnfvyRWebUiMDkug1Ls5MMHkEZ-AekYg/viewform">
+          <input type="submit" value="Add a New Recipe" />
+        </form>
+        </div>
+      </div>
+    }
+    </PrivateRoute>
   ].concat(routes)
   return (
-    <Router>
+    <div>
+      <header>
+          <NavBar/>
+      </header>
       <div>
-        {/*
-          A <Switch> looks through all its children <Route>
-          elements and renders the first one whose path
-          matches the current URL. Use a <Switch> any time
-          you have multiple routes, but you want only one
-          of them to render at a time
-        */}
         <Switch>{routes}</Switch>
       </div>
-    </Router>
-
-
-
-
+    </div>
   );
 }

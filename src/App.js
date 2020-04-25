@@ -7,7 +7,10 @@ import Contents from './components/Contents'
 import {
   useAuth0
 } from "./react-auth0-spa";
-import NavBar from "./components/NavBar";
+import {
+  BrowserRouter as Router
+} from "react-router-dom";
+import history from "./utils/history";
 
 function App() {
   const [recipes, setRecipes] = useState([]);
@@ -50,23 +53,17 @@ function App() {
   if (loading) {
     return <div > Loading... </div>;
   } else {
+    console.log(recipes)
     return (
       <div>
         <div className="App">
-        <header>
-          <NavBar />
-        </header>
-          <Contents recipes={recipes}/>
-        </div>
-        <div>
-          <form action="https://docs.google.com/forms/d/e/1FAIpQLSc0iCXAFZ6UH9n3vkWnfvyRWebUiMDkug1Ls5MMHkEZ-AekYg/viewform">
-            <input type="submit" value="Add a New Recipe" />
-          </form>
+          <Router history={history}>
+            <Contents recipes={recipes}/>
+          </Router>
         </div>
       </div>
     );
   }
-
 }
 
 export default App;

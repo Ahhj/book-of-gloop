@@ -1,8 +1,4 @@
 import React, { Component } from "react";
-import {
-  Route,
-  Link
-} from "react-router-dom";
 import Page from './Page'
 import './Recipe.css'
 
@@ -58,9 +54,6 @@ export default class Recipe extends Component {
     return (
       <div className="Recipe">
         <Page name={this.props.name} content={this.renderContent()} />
-        <Route>
-          <Link to={'/Contents'}>{'Go to contents'}</Link>
-        </Route>
       </div>
     );
   }
