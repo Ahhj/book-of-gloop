@@ -53,7 +53,6 @@ function App() {
   if (loading) {
     return <div > Loading... </div>;
   } else {
-    console.log(recipes)
     return (
       <div>
         <div className="App">

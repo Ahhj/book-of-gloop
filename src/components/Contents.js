@@ -27,7 +27,6 @@ export default function Contents(props) {
   var routes = props.recipes.map(
     (recipe) =>
       {
-        console.log(recipe);
         const path = `/${recipe.name}`;
         const component = () => <Recipe {...recipe}></Recipe>
         return <PrivateRoute
