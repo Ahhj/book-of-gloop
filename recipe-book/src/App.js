@@ -22,11 +22,11 @@ class App extends Component {
           recipes.forEach(
             recipe => {
               recipe.name = recipe.Title;
-              recipe.tags = recipe.Descriptors.split(";");
+              recipe.tags = recipe.Tags.split(";");
               recipe.time = recipe.Span;
               recipe.servings = recipe.Volume;
               recipe.instructions = recipe.Directions.split(";");
-              recipe.image = recipe.Image
+              recipe.image = recipe.Image_Link
               recipe.ingredients = recipe.Components.split(";").map(item =>
                 {
                   const name = item.match(/(.*?)(?![^\(])/g);
