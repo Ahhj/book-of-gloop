@@ -12,7 +12,7 @@ const NavBar = () => {
       {!isAuthenticated && (
         <button onClick={() => loginWithRedirect({})}>Login</button>
       )}
-      {isAuthenticated && <button onClick={() => logout()}>Logout</button>}
+      {isAuthenticated && <button onClick={() => logout({ returnTo: window.location.origin })}>Logout</button>}
       {isAuthenticated && (
         <span>
           <Link to="/">Home</Link>&nbsp;
