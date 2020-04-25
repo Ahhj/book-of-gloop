@@ -2,3 +2,4 @@
 .DS_Store
 node_modules
 .vscode
+auth_config.json

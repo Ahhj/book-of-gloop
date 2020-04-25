@@ -1,18 +1,19 @@
 // https://docs.google.com/spreadsheets/d/e/2PACX-1vSDlXkDTivQ5hcGkcFJzsBpZOVZKoeJakcpkHnfERns96CKHoVeWyrgpsomZzYfGEC8NhrgEGmOgUdW/pubhtml
 
-import React, { Component } from 'react';
+import React, { useState, useEffect } from 'react';
 import './App.css';
 import Tabletop from 'tabletop';
 import Contents from './components/Contents'
+import {
+  useAuth0
+} from "./react-auth0-spa";
+import NavBar from "./components/NavBar";
 
-class App extends Component {
-  constructor() {
-    super()
-    this.state = {
-      recipes: []
-    }
-  }
-  componentDidMount() {
+function App() {
+  const [recipes, setRecipes] = useState([]);
+  const { loading } = useAuth0();
+
+  useEffect(() => {
     Tabletop.init({
       key: 'https://docs.google.com/spreadsheets/d/1xxwUBoZ1bm2O_0eX4Ltz5P9SDq8-XiCQIM28VdOtOAU/edit?usp=sharing',
       callback: data =>
@@ -39,29 +40,30 @@ class App extends Component {
               );
             }
           );
-          this.setState({
-            recipes: recipes
-          })
+          setRecipes(recipes)
         },
       simpleSheet: false,
       parseNumbers: true
     })
-  }
+  })
 
-  render() {
-    const { recipes } = this.state;
+  if (loading) {
+    return <div > Loading... </div>;
+  } else {
     return (
       <div>
-      <div className="App">
-        <Contents recipes={recipes}/>
+        <div className="App">
+        <header>
+          <NavBar />
+        </header>
+          <Contents recipes={recipes}/>
+        </div>
+        <div>
+          <form action="https://docs.google.com/forms/d/e/1FAIpQLSc0iCXAFZ6UH9n3vkWnfvyRWebUiMDkug1Ls5MMHkEZ-AekYg/viewform">
+            <input type="submit" value="Add a New Recipe" />
+          </form>
+        </div>
       </div>
-      <div>
-      <form action="https://docs.google.com/forms/d/e/1FAIpQLSc0iCXAFZ6UH9n3vkWnfvyRWebUiMDkug1Ls5MMHkEZ-AekYg/viewform">
-      <input type="submit" value="Add a New Recipe" />
-      </form>
-      </div>
-      </div>
-
     );
   }
 

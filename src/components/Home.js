@@ -13,7 +13,6 @@ import dfo from './images/dfo.jpg';
 import kitchen from './images/kitchen.jpg';
 
 
-
 export default function Home() {
 
 
