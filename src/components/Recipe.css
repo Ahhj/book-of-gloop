@@ -14,6 +14,13 @@ h2 {
   position: static;
 }
 
+p {
+  font-family: Palatino Linotype, Book Antiqua, Palatino, serif;
+  text-align: center;
+  display: flexbox;
+  position: static;
+}
+
 div {
   font-family: Palatino Linotype, Book Antiqua, Palatino, serif;
   text-align: left;
