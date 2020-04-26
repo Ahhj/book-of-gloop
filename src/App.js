@@ -1,16 +1,16 @@
 // https://docs.google.com/spreadsheets/d/e/2PACX-1vSDlXkDTivQ5hcGkcFJzsBpZOVZKoeJakcpkHnfERns96CKHoVeWyrgpsomZzYfGEC8NhrgEGmOgUdW/pubhtml
 
 import React, { useState, useEffect } from 'react';
-import './App.css';
-import Tabletop from 'tabletop';
-import Contents from './components/Contents'
+import { useAuth0 } from "./react-auth0-spa";
 import {
-  useAuth0
-} from "./react-auth0-spa";
-import {
-  BrowserRouter as Router
+  Router,
+  Route
 } from "react-router-dom";
+import Tabletop from 'tabletop';
+import Home from './components/Home'
+import Contents from './components/Contents'
 import history from "./utils/history";
+import './App.css';
 
 function App() {
   const [recipes, setRecipes] = useState([]);
@@ -50,7 +50,7 @@ function App() {
       simpleSheet: false,
       parseNumbers: true
     })
-  })
+  }, [])
 
   if (loading) {
     return <div > Loading... </div>;
@@ -59,6 +59,7 @@ function App() {
       <div>
         <div className="App">
           <Router history={history}>
+            <Route exact path={"/"}><Home/></Route>
             <Contents recipes={recipes}/>
           </Router>
         </div>
