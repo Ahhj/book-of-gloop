@@ -28,6 +28,8 @@ function App() {
               recipe.name = recipe.Title;
               recipe.tags = recipe.Tags.split(";");
               recipe.time = recipe.Span;
+              recipe.intro = recipe.Description;
+              recipe.remarks = recipe.Remarks;
               recipe.servings = recipe.Volume;
               recipe.instructions = recipe.Directions.split(";");
               recipe.image = recipe.Image_Link

@@ -42,6 +42,10 @@ export default class Recipe extends Component {
   renderContent() {
     return (
       <div>
+
+        <p>{this.props.intro}</p>
+        <p>{this.props.remarks}</p>
+
         <div className='row'>
           <Ingredients content={this.props.ingredients} servings={this.props.servings} time={this.props.time} tags={this.props.tags}/>
           <Instructions instructions={this.props.instructions} image={this.props.image}/>
