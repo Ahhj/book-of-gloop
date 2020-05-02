@@ -29,7 +29,6 @@ function Instructions(props) {
   const imge = props.image;
   return (
     <div className='column'>
-      <img src={imge} alt={imge} />
       <h2>{'Instructions'}</h2>
       <ol>
         {instructions}
@@ -42,10 +41,10 @@ export default class Recipe extends Component {
   renderContent() {
     return (
       <div>
-
         <p>{this.props.intro}</p>
         <p>{this.props.remarks}</p>
-
+        <img src={this.props.image} alt={this.props.image} />
+        <img src={this.props.picture} alt={this.props.picture} />
         <div className='row'>
           <Ingredients content={this.props.ingredients} servings={this.props.servings} time={this.props.time} tags={this.props.tags}/>
           <Instructions instructions={this.props.instructions} image={this.props.image}/>

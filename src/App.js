@@ -32,7 +32,10 @@ function App() {
               recipe.remarks = recipe.Remarks;
               recipe.servings = recipe.Volume;
               recipe.instructions = recipe.Directions.split(";");
-              recipe.image = recipe.Image_Link
+              recipe.image = recipe.Image_Link;
+              recipe.remarks = recipe.Remarks;
+              recipe.intro = recipe.Description;
+              recipe.picture = recipe['Visual representation'].replace('open?', 'uc?export=view&');
               recipe.ingredients = recipe.Components.split(";").map(item =>
                 {
                   const name = item.match(/(.*?)(?![^\(])/g);
