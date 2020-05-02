@@ -44,37 +44,28 @@ export default function Contents(props) {
 
   var allchaps = recipes.map(a => a.chapter);
   var uniquechaps = allchaps.filter((v, i, a) => a.indexOf(v) === i).sort();
-  function makeUL(array) {
-    // Create the list element:
-    var list = document.createElement('ul');
 
-    for (var i = 0; i < array.length; i++) {
-        // Create the list item:
-        var item = document.createElement('li');
-
-        // Set its contents:
-        item.appendChild(document.createTextNode(array[i]));
-
-        // Add it to the list:
-        list.appendChild(item);
+  function myFunction(a) {
+    var m = []
+    for (var i = 0; i < a.length; i += 1){
+        m[i] = '<li>' + a[i] + '</li>';
     }
-
-    // Finally, return the constructed list:
-    return list;
+    return m;             // Function returns the product of a and b
   }
+
 
   const chapterSections = uniquechaps.map(
 
       (chapter) =>
         <li>
-          {chapter}
-            <ul>
-            {
-              recipes.filter(function(item){
-                return item.chapter == chapter;
-              }).map(a => a.Title).join(', ')
-            }
-          </ul>
+            {chapter}
+              <ul>
+              {
+                recipes.filter(function(item){
+                  return item.chapter == chapter;
+                }).map(a => <li>{a.Title}</li>)
+              }
+            </ul>
         </li>
 
     );
