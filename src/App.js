@@ -22,6 +22,7 @@ function App() {
       callback: data =>
         {
           var recipes = data.Responses.elements;
+
           // Attach instructions & ingredients to recipes.
           recipes.forEach(
             recipe => {
@@ -32,6 +33,7 @@ function App() {
               recipe.remarks = recipe.Remarks;
               recipe.servings = recipe.Volume;
               recipe.instructions = recipe.Directions.split(";");
+              recipe.chapter = recipe.Designation;
               recipe.image = recipe.Image_Link;
               recipe.remarks = recipe.Remarks;
               recipe.intro = recipe.Description;
