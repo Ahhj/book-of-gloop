@@ -12,6 +12,7 @@
     "@testing-library/react": "^9.5.0",
     "@testing-library/user-event": "^7.2.1",
     "react": "^16.13.1",
+    "react-collapsible": "^2.7.0",
     "react-cover-page": "^2.0.6",
     "react-db-google-sheets": "^2.0.0",
     "react-dom": "^16.13.1",

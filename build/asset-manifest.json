@@ -1,0 +1,28 @@
+{
+  "files": {
+    "main.css": "/static/css/main.0ae4e026.chunk.css",
+    "main.js": "/static/js/main.55f5502b.chunk.js",
+    "main.js.map": "/static/js/main.55f5502b.chunk.js.map",
+    "runtime-main.js": "/static/js/runtime-main.bfffcb60.js",
+    "runtime-main.js.map": "/static/js/runtime-main.bfffcb60.js.map",
+    "static/js/2.eba25a59.chunk.js": "/static/js/2.eba25a59.chunk.js",
+    "static/js/2.eba25a59.chunk.js.map": "/static/js/2.eba25a59.chunk.js.map",
+    "index.html": "/index.html",
+    "precache-manifest.f684c34214cde1c4c0fb6fb89ce341e1.js": "/precache-manifest.f684c34214cde1c4c0fb6fb89ce341e1.js",
+    "service-worker.js": "/service-worker.js",
+    "static/css/main.0ae4e026.chunk.css.map": "/static/css/main.0ae4e026.chunk.css.map",
+    "static/js/2.eba25a59.chunk.js.LICENSE.txt": "/static/js/2.eba25a59.chunk.js.LICENSE.txt",
+    "static/media/baking.jpg": "/static/media/baking.213a4951.jpg",
+    "static/media/christmas.jpg": "/static/media/christmas.664a4a34.jpg",
+    "static/media/clams.jpg": "/static/media/clams.fdbc979f.jpg",
+    "static/media/cocktail.jpg": "/static/media/cocktail.a76fa84a.jpg",
+    "static/media/dfo.jpg": "/static/media/dfo.1924043d.jpg",
+    "static/media/kitchen.jpg": "/static/media/kitchen.4db4526e.jpg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.bfffcb60.js",
+    "static/js/2.eba25a59.chunk.js",
+    "static/css/main.0ae4e026.chunk.css",
+    "static/js/main.55f5502b.chunk.js"
+  ]
+}
