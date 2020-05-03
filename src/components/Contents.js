@@ -7,95 +7,78 @@ import Recipe from './Recipe'
 import './Contents.css'
 import PrivateRoute from "./PrivateRoute";
 import NavBar from "./NavBar";
+import Collapsible from 'react-collapsible';
 
 export default function Contents(props) {
-  // const allchaps = ['gloopy gloop', 'sloppy slop', 'gloopy slop', 'sloppy gloop'];
-  var recipes = [{
-    "chapter" : "Vegeterian",
-    "address" : "32 street, london",
-    "Title" : 'Gloopy gloop'
-    },{
-    "chapter" : "Vegeterian",
-    "address" : "51 street, new york",
-    "Title" : 'Sloppy slop',
-    "gender" : "male"
-},{
-    "chapter" : "Chicken",
-    "address" : "14th street, birmingham",
-    "Title" : 'Gloopy slop',
-    "gender" : "male"
-},{
-    "chapter" : "Pudding",
-    "address" : "89th street, manchester",
-    "Title" : 'Sloppy Gloop'
-},{
-    "chapter": "Pudding",
-    "address": "6th street, Washington",
-    "Title": 'Slopity gloop gloop'
-},{
-    "chapter": "Baking",
-    "address": "4th street, VA",
-    "Title": 'Gloopity slop slop',
-    "gender": "male"
-}
-];
-
-
+  var recipes =  props.recipes
 
   var allchaps = recipes.map(a => a.chapter);
   var uniquechaps = allchaps.filter((v, i, a) => a.indexOf(v) === i).sort();
 
-  function myFunction(a) {
-    var m = []
-    for (var i = 0; i < a.length; i += 1){
-        m[i] = '<li>' + a[i] + '</li>';
-    }
-    return m;             // Function returns the product of a and b
-  }
-
-
   const chapterSections = uniquechaps.map(
 
       (chapter) =>
-        <li>
-            {chapter}
-              <ul>
-              {
-                recipes.filter(function(item){
-                  return item.chapter == chapter;
-                }).map(a => <li>{a.Title}</li>)
-              }
-            </ul>
-        </li>
 
+        <Collapsible trigger={chapter}>
+
+          <ul>
+            {
+              recipes.filter(function(item){
+                return item.chapter === chapter;
+              }).map(
+                rec => {
+                  const path = `/${rec.name}`;
+                  const component = () => <Recipe {...rec}></Recipe>
+                  return(
+                    <li><Link to={path} style={{textDecoration: 'none'}}>{rec.name}</Link></li>
+                  )
+              }
+              )
+            }
+          </ul>
+        </Collapsible>
     );
-  //var chap = allchaps.filter((v, i, a) => a.indexOf(v) === i);
-  // const recipeLinks = uniquechaps.map(
-  //     (recipe) =>
-  //       <li>
-  //         <p> {recipe} </p>
-  //       </li>
-  //
-  // );
-  //
-  // const recipeRoutes = props.recipes.map(
-  //   (recipe) =>
-  //     {
-  //       const path = `/${recipe.name}`;
-  //       const component = () => <Recipe {...recipe}></Recipe>
-  //       return (
-  //         <PrivateRoute
-  //           path={path}
-  //           component={component}
-  //         ></PrivateRoute>)
-  //     }
-  // );
+
+  const recipeRoutes = props.recipes.map(
+    (recipe) =>
+      {
+        const path = `/${recipe.name}`;
+        const component = () => <Recipe {...recipe}></Recipe>
+        return (
+          <PrivateRoute
+            path={path}
+            component={component}
+          ></PrivateRoute>)
+      }
+  );
 
   return (
 
     <div>
+    <header>
+        <NavBar/>
+    </header>
       <div>
-        <ul> {chapterSections} </ul>
+        <Switch>
+        <PrivateRoute
+            path={"/Contents"}
+          >
+          {
+            <div>
+
+              <div>
+                <ol>{chapterSections}</ol>
+              </div>
+              <div>
+              <form action="https://docs.google.com/forms/d/e/1FAIpQLSc0iCXAFZ6UH9n3vkWnfvyRWebUiMDkug1Ls5MMHkEZ-AekYg/viewform">
+                <input type="submit" value="Add a New Recipe" />
+              </form>
+              </div>
+            </div>
+          }
+          </PrivateRoute>
+          {recipeRoutes}
+        </Switch>
       </div>
     </div>
   );

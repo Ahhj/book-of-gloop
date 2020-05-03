@@ -12,15 +12,15 @@ export default function Home() {
   return (
     <div className="Home">
       <div className='row' >
-        <div className='col'><img src={baking} /></div>
-        <div className='col'><img src={christmas} /></div>
-        <div className='col'><img src={clams} /></div>
+        <div className='col'><img src={baking} alt={baking}/></div>
+        <div className='col'><img src={christmas} alt={christmas}/></div>
+        <div className='col'><img src={clams} alt={clams}/></div>
       </div>
       <h1>The Gloop Collection</h1>
       <div className='row'>
-        <div className='col'><img src={cocktail} /></div>
-        <div className='col'><img src={dfo} /></div>
-        <div className='col'><img src={kitchen} /></div>
+        <div className='col'><img src={cocktail} alt={cocktail}/></div>
+        <div className='col'><img src={dfo} alt={dfo}/></div>
+        <div className='col'><img src={kitchen} alt={kitchen}/></div>
       </div>
     </div>
   );
