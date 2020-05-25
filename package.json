@@ -1,53 +1,29 @@
 {
-  "name": "recipe-book",
-  "version": "0.1.0",
-  "engines": {
-    "node": "v13.11.0",
-    "npm": "6.13.7"
-  },
-  "private": true,
-  "dependencies": {
-    "@auth0/auth0-spa-js": "^1.7.0",
-    "@testing-library/jest-dom": "^4.2.4",
-    "@testing-library/react": "^9.5.0",
-    "@testing-library/user-event": "^7.2.1",
-    "react": "^16.13.1",
-    "react-collapsible": "^2.7.0",
-    "react-cover-page": "^2.0.6",
-    "react-db-google-sheets": "^2.0.0",
-    "react-dom": "^16.13.1",
-    "react-router-dom": "^5.1.2",
-    "react-scripts": "3.4.1",
-    "tabletop": "^1.6.2"
-  },
+  "name": "book-of-gloop",
+  "version": "1.0.0",
+  "description": "Gloop recipe book",
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject",
-    "storybook": "start-storybook -p 9009 -s public",
-    "build-storybook": "build-storybook -s public"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server/setupCredentials.js && node server",
+    "build": "cd client && npm install && npm run build"
   },
-  "eslintConfig": {
-    "extends": "react-app"
+  "cacheDirectories": [
+    "node_modules",
+    "client/node_modules"
+  ],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "express-jwt": "^5.3.3",
+    "express-jwt-authz": "^2.3.1",
+    "googleapis": "^39.2.0",
+    "jwks-rsa": "^1.8.0"
   },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
-  },
-  "devDependencies": {
-    "@storybook/addon-actions": "^5.3.18",
-    "@storybook/addon-links": "^5.3.18",
-    "@storybook/addons": "^5.3.18",
-    "@storybook/preset-create-react-app": "^2.1.1",
-    "@storybook/react": "^5.3.18"
+  "engines": {
+    "npm": "6.13.7",
+    "node": "13.11.0"
   }
 }
