@@ -1,0 +1,30 @@
+{
+  "name": "Book of Gloop",
+  "description": "View and edit recipes from the book of gloop",
+  "keywords": [],
+  "website": "https://book-of-gloop.herokuapp.com/",
+  "repository": "https://github.com/Ahhj/book-of-gloop",
+  "logo": "",
+  "success_url": "/",
+  "scripts": {
+    "postdeploy": ""
+  },
+  "env": {},
+  "addons": [
+    {
+      "plan": "auth0",
+      "options": {
+        "type": "nodejs"
+      }
+    }
+  ],
+  "buildpacks": [
+    {
+      "url": "https://github.com/mars/create-react-app-inner-buildpack"
+    },
+    {
+      "url": "heroku/nodejs"
+    }
+  ],
+  "environments": {}
+}
