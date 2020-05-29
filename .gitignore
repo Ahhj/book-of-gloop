@@ -4,4 +4,5 @@ node_modules
 .vscode
 credentials.json
 auth_config.json
+config.json
 build

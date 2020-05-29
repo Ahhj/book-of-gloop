@@ -3,13 +3,14 @@ const path = require("path");
 const jwt = require("express-jwt");
 const jwksRsa = require("jwks-rsa");
 const authConfig = require("./auth_config.json");
+const config = require("./config.json");
 const { GoogleDriveClientWrapper } = require("./GoogleDriveClientWrapper");
 
 const port = process.env.PORT || 3000;
 const app = express();
-
-const folderId = "1l6kXQ7exsaFIcaZlqiQgm7GCXEq9QWKw";
-const client = new GoogleDriveClientWrapper(folderId);
+const googleDriveFolderId =
+  process.env.GOOGLE_DRIVE_FOLDER_ID || config.googleDriveFolderId;
+const googleClient = new GoogleDriveClientWrapper(googleDriveFolderId);
 
 // Define middleware that validates incoming bearer tokens
 // using JWKS
@@ -20,7 +21,6 @@ const checkJwt = jwt({
     jwksRequestsPerMinute: 5,
     jwksUri: `https://${authConfig.domain}/.well-known/jwks.json`,
   }),
-
   audience: authConfig.audience,
   issuer: `https://${authConfig.domain}/`,
   algorithm: ["RS256"],
@@ -32,7 +32,7 @@ app.use(express.static(path.resolve(__dirname, "../client/build")));
 // GET: returns a list of the recipes in the recipes folder
 app.get("/api/recipes/list", checkJwt, (req, res) => {
   const { fullTextContains } = req.query;
-  client
+  googleClient
     .list(fullTextContains)
     .then((files) => res.status(200).send({ recipes: files }))
     .catch((error) => {
@@ -44,7 +44,7 @@ app.get("/api/recipes/list", checkJwt, (req, res) => {
 // GET: returns data for recipe with fileId
 app.get("/api/recipes/download", checkJwt, (req, res) => {
   const { fileId } = req.query;
-  client
+  googleClient
     .get(fileId)
     .then((data) => res.status(200).send(data))
     .catch((error) => {
@@ -62,7 +62,7 @@ app.post(
   (req, res) => {
     const { data } = req.body;
     const fileName = `${data.title}.json`;
-    client
+    googleClient
       .create(fileName, data)
       .then(({ fileId }) => res.status(200).send({ fileId }))
       .catch((error) => {
@@ -80,7 +80,7 @@ app.put(
   (req, res) => {
     const { fileId, data } = req.body;
     const newFileName = data.title;
-    client
+    googleClient
       .update(fileId, newFileName, data)
       .then(() => res.status(200).send())
       .catch((error) => {
