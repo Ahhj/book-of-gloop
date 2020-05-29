@@ -4,7 +4,6 @@ import { Redirect } from "react-router-dom";
 import App from "./App";
 import * as serviceWorker from "./serviceWorker";
 import { Auth0Provider } from "./react-auth0-spa";
-
 import { createGlobalStyle } from "styled-components";
 
 const GlobalStyle = createGlobalStyle`
