@@ -4,7 +4,6 @@ import { Redirect } from "react-router-dom";
 import App from "./App";
 import * as serviceWorker from "./serviceWorker";
 import { Auth0Provider } from "./react-auth0-spa";
-import config from "./auth_config.json";
 
 import { createGlobalStyle } from "styled-components";
 
@@ -42,10 +41,10 @@ const onRedirectCallback = (appState) => {
 
 ReactDOM.render(
   <Auth0Provider
-    domain={config.domain}
-    client_id={config.clientId}
+    domain={process.env.AUTH0_DOMAIN.domain}
+    client_id={process.env.AUTH0_CLIENT_ID.clientId}
     redirect_uri={window.location.origin}
-    audience={config.audience}
+    audience={process.env.AUTH0_AUDIENCE.audience}
     onRedirectCallback={onRedirectCallback}
   >
     <GlobalStyle />

@@ -1,9 +1,8 @@
+require("dotenv").configure();
 const express = require("express");
 const path = require("path");
 const jwt = require("express-jwt");
 const jwksRsa = require("jwks-rsa");
-const authConfig = require("./auth_config.json");
-const config = require("./config.json");
 const { GoogleDriveClientWrapper } = require("./GoogleDriveClientWrapper");
 
 const port = process.env.PORT || 3000;
@@ -19,10 +18,10 @@ const checkJwt = jwt({
     cache: true,
     rateLimit: true,
     jwksRequestsPerMinute: 5,
-    jwksUri: `https://${authConfig.domain}/.well-known/jwks.json`,
+    jwksUri: `https://${process.env.AUTH0_DOMAIN}/.well-known/jwks.json`,
   }),
-  audience: authConfig.audience,
-  issuer: `https://${authConfig.domain}/`,
+  audience: process.env.AUTH0_AUDIENCE,
+  issuer: `https://${process.env.AUTH0_DOMAIN}/`,
   algorithm: ["RS256"],
 });
 
