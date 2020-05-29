@@ -9,7 +9,9 @@
   "scripts": {
     "postdeploy": ""
   },
-  "env": {},
+  "env": {
+    "GOOGLE_FOLDER_ID": "1l6kXQ7exsaFIcaZlqiQgm7GCXEq9QWKw"
+  },
   "addons": [],
   "buildpacks": [
     {
@@ -18,5 +20,12 @@
     {
       "url": "heroku/nodejs"
     }
-  ]
+  ],
+  "environments": {
+    "review": {
+      "env": {
+        "GOOGLE_FOLDER_ID": "1Owjk4ENCCLGASQzdH-ieOB_sU2RauakR"
+      }
+    }
+  }
 }
