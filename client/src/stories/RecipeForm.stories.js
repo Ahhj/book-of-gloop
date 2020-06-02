@@ -1,6 +1,7 @@
 import React from "react";
 import { action } from "@storybook/addon-actions";
 import RecipeForm from "../components/RecipeForm";
+import okonomiyaki from "../assets/images/okonomiyaki.jpg";
 
 export default {
   title: "RecipeForm",
@@ -19,6 +20,7 @@ const initialData = {
   intro: "this is the intro",
   remarks: "these are the remarks",
   tags: ["these are some tags tag1", "tag2"],
+  image: okonomiyaki,
 };
 
 export const WithInitialData = () => (
