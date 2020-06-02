@@ -27,12 +27,12 @@ export default function Recipe({
           <Column span={`${image ? "6" : "0"}`}>
             <Image src={image}></Image>
           </Column>
-          <Column span={`${image ? "2" : "2"}`}>
+          <Column span={`${image ? "2" : "4"}`}>
             <Ingredients
               ingredients={ingredients ? ingredients : []}
             ></Ingredients>
           </Column>
-          <Column span={`${image ? "4" : "10"}`}>
+          <Column span={`${image ? "4" : "8"}`}>
             <Steps steps={steps ? steps : []}></Steps>
           </Column>
         </Row>
