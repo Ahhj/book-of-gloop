@@ -1,5 +1,6 @@
 import React from "react";
 import Recipe from "../components/Recipe";
+import okonomiyaki from "../assets/images/okonomiyaki.jpg";
 
 export default {
   title: "Recipe",
@@ -10,6 +11,7 @@ const recipeData = {
   tags: ["gloop", "slop"],
   intro: "This is some yummy gloop",
   remarks: "Its real yummy",
+  image: okonomiyaki,
   ingredients: [
     {
       name: "Gloop",
@@ -20,13 +22,14 @@ const recipeData = {
       quantity: "100kg",
     },
     {
-      name: "More slop",
+      name: "More slop More slop More slop",
       quantity: "100kg",
     },
   ],
   steps: [
     {
-      description: "Slop the slop",
+      description:
+        "Slop the slop Slop the slop Slop the slop Slop the slop Slop the slop Slop the slop Slop the slop ",
       order: 1,
       updatedAt: new Date(2018, 0, 1, 9, 0),
     },

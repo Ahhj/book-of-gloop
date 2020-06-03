@@ -1,46 +1,95 @@
 # The Book of Gloop
 
-Nodejs express server and React front-end app for the Book of Gloop.
+Nodejs express server and React front-end for the Book of Gloop web app.
 
-## Overview
+The server provides an API and serves a static build of the React app. Data is stored as json files in Google Drive and is accessible to the front end via the API.
 
-The server provides an API and serves a static build of the React app. The API retrieves and serves JSON files from Google Drive containing the recipes and implements the following endpoints:
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-- GET /api/list: list the recipes and their fileIds for download
-- GET /api/download: download the data for a recipe
-- POST /api/create: create a new recipe
-- PUT /api/update: update an existing recipe
+# Getting Started
 
-## Local Development
+## Prerequisites
 
-To start the server (with auto-refresh):
-`cd server && nodemon index.js`
+- Heroku CLI https://devcenter.heroku.com/articles/heroku-cli
+- NodeJs
+- React
+- Google Drive with API enabled https://developers.google.com/drive/api/v3/quickstart/nodejs
+- Auth0 (see Authentication section)
+
+## Environment
+
+The application data will be directed to the folder on Google Drive with folderId given by the environmental variable GOOGLE_DRIVE_FOLDER_ID, which can be retrieved by inspected the URL with the folder open in the browser.
+
+Additional variables are required for authentication (see below).
+
+# Deployment to Heroku
+
+The deployment to heroku is configured by the app.json file in the project root.
+
+Create an app on Heroku
+
+`heroku create -a book-of-gloop`
+
+Add the Heroku apps as a git remote:
+
+`heroku git:remote -a book-of-gloop`
+
+Add the Auth0 addon through the Heroku portal. Add the required environmental variables for authentication to the app on Heroku (see below). Note: environmental variables must be set on the app before the push (the variables are passed to the React app at build time, so they cannot be set after the build.)
+
+Push the app to Heroku:
+
+`git push heroku master`
+
+# Local development
+
+Firstly, create .env files containing the authentication variables (see below): put one in the client directory and one in server (DO NOT commit these).
+
+## Client
 
 To start the react app without the server:
+
 `cd client && npm start`
 
 The server will serve the static build at client/build. To create a new build:
+
 `cd client && npm run build`
 
-The server requires a credentials.json file to authenticate with Google Drive (see below).
+## Server
 
-## Deployment
+To start the server (with auto-refresh):
 
-Install the heroku CLI https://devcenter.heroku.com/articles/heroku-cli
+`cd server && nodemon index.js`
 
-Add the Heroku apps as a git remote:
-`heroku git:remote -a book-of-gloop-dev && git remote rename heroku heroku-dev`
-`heroku git:remote -a book-of-gloop && git remote rename heroku heroku-prod`
+The API implements the following endpoints:
 
-Push the app to Heroku:
-`git push heroku-dev master`
-`git push heroku-prod master`
+- GET /api/list: list the files by name and their ids for download
+- GET /api/download: download the data for a given file id
+- POST /api/create: create a new file given a name and data
+- PUT /api/update: update an existing file
 
-## Authentication
+# Authentication
 
-The server authenticates with Google Drive using credentials stored in server/credentials.json which is downloaded from Google (DO NOT commit this file). When the server starts on Heroku, it will first run server/setupCredentials.js which creates server/credentials.json on the Heroku side. To access the credentials on Heroku create two environmental variables:
+## Google Drive API
 
-- GOOGLE_APPLICATION_CREDENTIALS: the path to the credentials file on Heroku
-  `heroku config:add GOOGLE_APPLICATION_CREDENTIALS="server/credentials.json"`
-- GOOGLE_CONFIG: a string holding the credentials
-  `heroku config:add GOOGLE_CONFIG="$(< server/credentials.json)"`
+The server interacts with Google Drive using service account credentials (for more details see https://developers.google.com/drive/api/v3/quickstart/nodejs). Note: folders must be shared with the service account to enable access via the Google Drive API.
+
+The server requires the following environmental variables to authenticate with Google Drive:
+
+- GOOGLE_APPLICATION_CREDENTIALS: the path to the credentials file
+- GOOGLE_CONFIG: a string holding the credentials json object
+
+TIP: to extract the contents of credentials.json to an environmental variable use
+
+`GOOGLE_CONFIG="$(< server/credentials.json)"`
+
+## Auth0
+
+Users are authenticated using the Heroku Auth0 addon (https://elements.heroku.com/addons/auth0). The user must login using Auth0 on the front end to interact with the app and the web API.
+
+The server and client need to following environmental variables to authenticate with Auth0 (note: for the react app these must be prepended with REACT*APP*):
+
+- AUTH0_CLIENT_ID: id for the application obtained through the Auth0 portal
+- AUTH0_DOMAIN: id for the application domain obtained through the Auth0 portal
+- AUTH0_AUDIENCE: identifier for the API configured through the Auth0 portal.
+
+For more details on getting started with Auth0 for a React/Node application, see https://auth0.com/blog/react-tutorial-building-and-securing-your-first-app/.
