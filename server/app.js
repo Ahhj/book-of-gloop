@@ -1,8 +1,16 @@
 const express = require("express");
+const bodyParser = require("body-parser");
 const path = require("path");
 const recipes = require("./controllers");
 
 const app = express();
+
+app.use(
+  bodyParser.json({
+    extended: true,
+    limit: "50mb",
+  })
+);
 
 app.use("/api", recipes);
 
