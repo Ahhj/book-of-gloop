@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { useDropzone } from "react-dropzone";
 import {
   Thumb,
@@ -8,33 +8,18 @@ import {
   DropZoneContainer,
 } from "./style";
 
-export default function ImageDropZone(props) {
-  const [files, setFiles] = useState([]);
+export default function ImageDropZone({ image, onChange }) {
   const { getRootProps, getInputProps } = useDropzone({
     accept: "image/*",
     onDrop: (acceptedFiles) => {
-      setFiles(
-        acceptedFiles.map((file) =>
-          Object.assign(file, {
-            preview: URL.createObjectURL(file),
-          })
-        )
-      );
+      let file = acceptedFiles[0];
+      readFileAsBase64(file).then(onChange);
     },
   });
-  const thumbs = files.map((file) => (
-    <Thumb key={file.name}>
-      <ThumbInner>
-        <ImagePreview src={file.preview} />
-      </ThumbInner>
+  const thumb = (
+    <Thumb key={"uploaded-thumb"}>
+      <ThumbInner>{image ? <ImagePreview src={image} /> : null}</ThumbInner>
     </Thumb>
-  ));
-  useEffect(
-    () => () => {
-      // Make sure to revoke the data uris to avoid memory leaks
-      files.forEach((file) => URL.revokeObjectURL(file.preview));
-    },
-    [files]
   );
   return (
     <div className="container">
@@ -43,8 +28,24 @@ export default function ImageDropZone(props) {
           <input {...getInputProps()} />
           <p>Drag 'n' drop an image here, or click to select one</p>
         </div>
-        <ThumbsContainer>{thumbs}</ThumbsContainer>
+        <ThumbsContainer>{thumb}</ThumbsContainer>
       </DropZoneContainer>
     </div>
   );
+}
+
+function readFileAsBase64(file) {
+  let reader = new FileReader();
+  return new Promise(function(resolve, reject) {
+    reader.onerror = () => {
+      reader.abort();
+      reject("Error reading file");
+    };
+
+    reader.onload = (event) => {
+      let base64 = event.target.result;
+      resolve(base64);
+    };
+    reader.readAsDataURL(file);
+  });
 }

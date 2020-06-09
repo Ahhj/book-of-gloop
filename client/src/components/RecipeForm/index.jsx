@@ -18,7 +18,7 @@ export default function RecipeForm({
   intro,
   remarks,
   tags,
-  img,
+  image,
   ingredients,
   steps,
   onSubmit,
@@ -26,7 +26,7 @@ export default function RecipeForm({
   const init = () => {
     ingredients = ingredients ? ingredients : [];
     steps = steps ? steps : [];
-    return { title, intro, remarks, tags, img, ingredients, steps };
+    return { title, intro, remarks, tags, image, ingredients, steps };
   };
   const [state, dispatch] = useReducer(
     function(state, action) {
@@ -40,7 +40,7 @@ export default function RecipeForm({
           return newState;
       }
     },
-    { title, intro, remarks, tags, img, ingredients, steps },
+    { title, intro, remarks, tags, image, ingredients, steps },
     init
   );
   const handleSubmit = useCallback((e) => onSubmit(e, state), [
@@ -91,8 +91,11 @@ export default function RecipeForm({
       </div>
       <BodyContainer>
         <Row>
-          <Column span="6">
-            <ImageDropZone></ImageDropZone>
+          <Column span="5">
+            <ImageDropZone
+              image={state.image}
+              onChange={(image) => dispatch({ key: "image", value: image })}
+            ></ImageDropZone>
           </Column>
           <Column span="2">
             <EditableIngredients
@@ -102,7 +105,7 @@ export default function RecipeForm({
               }
             ></EditableIngredients>
           </Column>
-          <Column span="4">
+          <Column span="5">
             <EditableSteps
               items={state.steps}
               onChange={(items) => dispatch({ key: "steps", value: items })}
