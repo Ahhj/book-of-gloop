@@ -56,7 +56,7 @@ router.put(
     const { fileId, data } = req.body;
     const fileName = `${data.title}.json`;
     updateDriveFile(fileId, fileName, data)
-      .then(() => sendSuccessResponse(null, status))
+      .then(() => sendSuccessResponse(null, res))
       .catch((error) => sendErrorResponse(error, res));
   }
 );
