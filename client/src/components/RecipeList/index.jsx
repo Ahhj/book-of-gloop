@@ -6,6 +6,10 @@ import {
   RecipeLinkContainer,
 } from "./style";
 
+/**
+ * A list of recipes.
+ * @param {*} param0
+ */
 export default function RecipeList({ items, defaultSearchValue, onSearch }) {
   return (
     <RecipeListBody>

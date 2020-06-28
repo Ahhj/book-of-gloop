@@ -7,6 +7,10 @@ import {
   BodyContainer,
 } from "../RecipeContainer/style";
 
+/**
+ * Recipe component.
+ * @param {*} param0
+ */
 export default function Recipe({
   title,
   intro,

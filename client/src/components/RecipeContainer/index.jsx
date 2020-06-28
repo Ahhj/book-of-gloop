@@ -5,6 +5,10 @@ import Recipe from "components/Recipe";
 import RecipeForm from "components/RecipeForm";
 import { Button, EditButtonContainer } from "./style";
 
+/**
+ * Interacts with API to provide data for
+ * Recipe or RecipeForm components
+ */
 export default function RecipeContainer() {
   let history = useHistory(); // For redirect
   let { recipeId } = useParams();
