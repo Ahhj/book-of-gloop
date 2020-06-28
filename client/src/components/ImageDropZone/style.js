@@ -55,6 +55,5 @@ export const ThumbInner = styled.div`
 
 export const ImagePreview = styled.img`
   display: "inline-block";
-  width: 200px;
-  height: 200px;
+  width: 100%;
 `;

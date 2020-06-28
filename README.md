@@ -46,6 +46,10 @@ Firstly, create .env files containing the authentication variables (see below): 
 
 ## Client
 
+To install the requirements:
+
+`cd client && npm install`
+
 To start the react app without the server:
 
 `cd client && npm start`
@@ -54,7 +58,13 @@ The server will serve the static build at client/build. To create a new build:
 
 `cd client && npm run build`
 
+Note: Google Drive data not be accessible without the server running
+
 ## Server
+
+To install the requirements, from the project root:
+
+`npm install`
 
 To start the server (with auto-refresh):
 
