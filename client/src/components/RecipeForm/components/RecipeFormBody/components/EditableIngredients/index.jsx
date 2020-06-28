@@ -1,6 +1,6 @@
 import React, { useCallback } from "react";
 import EditableList from "components/EditableList";
-import { ListHeader, ListContainer } from "../RecipeContainer/style";
+import { ListHeader, ListContainer } from "components/RecipeContainer/style";
 
 export default function EditableIngredients(props) {
   return (

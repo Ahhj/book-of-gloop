@@ -2,8 +2,8 @@ import React, { useCallback } from "react";
 import PropTypes from "prop-types";
 import ImageDropZone from "components/ImageDropZone";
 import { Row, Column } from "components/Grid";
-import EditableIngredients from "components/EditableIngredients";
-import EditableSteps from "components/EditableSteps";
+import EditableIngredients from "./components/EditableIngredients";
+import EditableSteps from "./components/EditableSteps";
 import { BodyContainer } from "components/RecipeContainer/style";
 
 /**
