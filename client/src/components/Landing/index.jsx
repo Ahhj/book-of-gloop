@@ -7,7 +7,7 @@ import kitchen from "assets/images/kitchen.jpg";
 import { Row, Column } from "components/Grid";
 import { Title, Image, Container } from "./style";
 
-export default function Home() {
+export default function Landing() {
   return (
     <Row>
       <Column span="3">

@@ -60,7 +60,7 @@ export default function RecipeContainer() {
             dispatch({ key, value });
           }
         } else {
-          // Create through API and ridrect to new recipe.
+          // Create through API and redirect to new recipe.
           create({ data: result }).then(({ fileId }) => {
             history.push(`/recipe/${fileId}`);
           });
