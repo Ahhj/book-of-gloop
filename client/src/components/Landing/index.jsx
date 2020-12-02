@@ -1,29 +1,45 @@
 import React from "react";
 import baking from "assets/images/baking.jpg";
+import baking2 from "assets/images/baking2.jpg";
 import christmas from "assets/images/christmas.jpg";
 import clams from "assets/images/clams.jpg";
+import washing from "assets/images/washing.jpg";
 import cocktail from "assets/images/cocktail.jpg";
 import kitchen from "assets/images/kitchen.jpg";
-import { Row, Column } from "components/Grid";
-import { Title, Image, Container } from "./style";
+import { Title, Container } from "./style";
+
+import { ReactPhotoCollage } from "react-photo-collage";
 
 export default function Landing() {
+  const setting = {
+    width: "80%",
+    height: ["300px", "300px", "300px", "300px"],
+    layout: [1, 2, 1, 2],
+    photos: [
+      { src: baking },
+      { src: washing },
+      { src: clams },
+      { src: baking2 },
+      { src: christmas },
+      { src: cocktail },
+    ],
+    showNumOfRemainingPhotos: false,
+  };
+
   return (
-    <Row>
-      <Column span="3">
-        <Image src={clams} alt="" />
-        <Image src={christmas} alt="" />
-      </Column>
-      <Column span="6">
-        <Container>
-          <Image src={baking} alt="" />
-          <Title>The Book of Gloop</Title>
-        </Container>
-      </Column>
-      <Column span="3">
-        <Image src={cocktail} alt="" />
-        <Image src={kitchen} alt="" />
-      </Column>
-    </Row>
+    <section
+      style={{
+        width: "100%",
+        backgroundPosition: "center",
+        backgroundSize: "cover",
+        backgroundRepeat: "no-repeat",
+        backgroundImage: `url(${kitchen})`,
+      }}
+    >
+      <Container>
+        <Title>The Book of Gloop</Title>
+        <ReactPhotoCollage {...setting} />
+      </Container>
+    </section>
   );
 }
