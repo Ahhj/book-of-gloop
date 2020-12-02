@@ -8,7 +8,7 @@ import { createGlobalStyle } from "styled-components";
 
 const GlobalStyle = createGlobalStyle`
   body {
-    font-family: Palatino Linotype, Book Antiqua, Palatino, serif;
+    font-family: Gill Sans, Arial, sans-serif;
   }
 
   button {

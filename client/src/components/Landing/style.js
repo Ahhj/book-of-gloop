@@ -7,6 +7,7 @@ export const Title = styled.h1`
   top: 5%;
   font-size: 70px;
   font-weight: lighter;
+  z-index: 1000;
 `;
 
 export const Image = styled.img`
