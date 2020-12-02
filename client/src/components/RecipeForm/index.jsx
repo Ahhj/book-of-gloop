@@ -6,8 +6,8 @@ import RecipeFormBody from "./components/RecipeFormBody";
 import RecipeFormHeader from "./components/RecipeFormHeader";
 
 /**
- * Component for creating/editing recipes.
- * @param {*} props
+ * Component to represent form creating/editing recipes.
+ * @param {*} props dictionary of recipe fields (title, intro, remarks, tags, image, ingredients, steps)
  */
 export default function RecipeForm(props) {
   const { title, intro, remarks, tags, image, ingredients, steps } = props;

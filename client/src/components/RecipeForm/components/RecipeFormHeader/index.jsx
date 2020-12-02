@@ -9,7 +9,7 @@ import { TitleInput, IntroInput, RemarksInput, TagsInput } from "./style";
 export default function RecipeFormHeader(props) {
   const handleChange = useCallback(
     (e) => props.onChange({ key: e.target.name, value: e.target.value }),
-    []
+    [props]
   );
 
   // Get props for input field with text type

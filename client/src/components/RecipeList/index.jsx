@@ -7,8 +7,10 @@ import {
 } from "./style";
 
 /**
- * A list of recipes.
- * @param {*} param0
+ * Component representing a list of recipes
+ * @param {array} items list of dictionary objects containing recipe data
+ * @param {string} default default value to populate the search bar
+ * @param {function} onSearch callback when query entered in search bar
  */
 export default function RecipeList({ items, defaultSearchValue, onSearch }) {
   return (

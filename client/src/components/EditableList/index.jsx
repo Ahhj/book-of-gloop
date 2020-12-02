@@ -3,7 +3,6 @@ import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd";
 import uuid from "react-uuid";
 import {
   AddItemButton,
-  DeleteItemButton,
   DraggableListContainer,
   DraggableItemContainer,
 } from "./style";
@@ -78,20 +77,13 @@ export default function EditableList({ items, onChange, EditableItem }) {
                     isDragging={snapshot.isDragging}
                   >
                     {
-                      <div>
-                        <li>
-                          <EditableItem
-                            onChange={(e) => handleEditItem(e, item.id)}
-                            item={item}
-                          ></EditableItem>
-                          <DeleteItemButton
-                            onClick={() => handleDeleteItem(item.id)}
-                            type="button"
-                          >
-                            -
-                          </DeleteItemButton>
-                        </li>
-                      </div>
+                    <li>
+                        <EditableItem
+                        onDelete={() => handleDeleteItem(item.id)}
+                        onChange={(e) => handleEditItem(e, item.id)}
+                        item={item}
+                        ></EditableItem>
+                    </li>
                     }
                   </DraggableItemContainer>
                 )}

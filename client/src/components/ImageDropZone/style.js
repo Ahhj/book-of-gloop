@@ -16,16 +16,16 @@ const getColor = (props) => {
 export const DropZoneContainer = styled.div`
   display: inline-block;
   align-items: center;
-  padding: 20px;
+  padding: 10px;
   border-width: 2px;
-  border-radius: 0px;
+  border-radius: 2px;
   border-color: ${(props) => getColor(props)};
   border-style: dashed;
   background-color: #fafafa;
   color: #bdbdbd;
   outline: none;
   transition: border 0.24s ease-in-out;
-  width: 50%;
+  width: 100%;
 `;
 
 export const ThumbsContainer = styled.aside`

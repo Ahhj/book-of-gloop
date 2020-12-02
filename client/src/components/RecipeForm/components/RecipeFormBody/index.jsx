@@ -4,7 +4,7 @@ import ImageDropZone from "components/ImageDropZone";
 import { Row, Column } from "components/Grid";
 import EditableIngredients from "./components/EditableIngredients";
 import EditableSteps from "./components/EditableSteps";
-import { BodyContainer } from "components/RecipeContainer/style";
+import { BodyContainer } from "./style";
 
 /**
  * Component for the recipe form body.
@@ -13,7 +13,7 @@ import { BodyContainer } from "components/RecipeContainer/style";
 export default function RecipeFormBody(props) {
   const handleChangeField = useCallback(
     (key, value) => props.onChange({ key, value }),
-    []
+    [props]
   );
 
   const handleChangeImage = (image) => handleChangeField("image", image);
@@ -26,24 +26,26 @@ export default function RecipeFormBody(props) {
   return (
     <BodyContainer>
       <Row>
-        <Column span="5">
-          <ImageDropZone
-            image={props.image}
-            onChange={(image) => handleChangeImage(image)}
-          ></ImageDropZone>
+        <Column span="6">
+            <ImageDropZone
+              image={props.image}
+              onChange={(image) => handleChangeImage(image)}
+            ></ImageDropZone>
         </Column>
-        <Column span="2">
+        <Column span="6">
           <EditableIngredients
             items={props.ingredients}
             onChange={(items) => handleChangeIngredients(items)}
           ></EditableIngredients>
         </Column>
-        <Column span="5">
-          <EditableSteps
-            items={props.steps}
-            onChange={(items) => handleChangeSteps(items)}
-          ></EditableSteps>
-        </Column>
+      </Row>
+      <Row>
+        <Column span="12">
+            <EditableSteps
+              items={props.steps}
+              onChange={(items) => handleChangeSteps(items)}
+            ></EditableSteps>
+            </Column>
       </Row>
     </BodyContainer>
   );

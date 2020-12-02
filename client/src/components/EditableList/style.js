@@ -1,8 +1,8 @@
 import styled from "styled-components";
 
-export const AddItemButton = styled.button``;
-
-export const DeleteItemButton = styled.button``;
+export const AddItemButton = styled.button`
+    display: block;
+`;
 
 export const DraggableListContainer = styled.div`
   padding: grid;
@@ -17,4 +17,6 @@ export const DraggableItemContainer = styled.div`
   padding: ${grid * 2}px;
   margin: 0 0 ${grid}px 0;
   background: ${(props) => (props.isDragging ? "lightgreen" : "#CFD8DC")};
+  display: flex;
+  flex-direction: row;
 `;

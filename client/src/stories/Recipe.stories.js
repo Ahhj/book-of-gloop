@@ -23,7 +23,8 @@ const recipeData = {
     },
     {
       name: "More slop More slop More slop",
-      quantity: "100kg",
+      quantity: "100",
+      units: "g",
     },
   ],
   steps: [

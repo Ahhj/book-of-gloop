@@ -1,6 +1,7 @@
 import React, { useCallback } from "react";
 import EditableList from "components/EditableList";
 import { ListHeader, ListContainer } from "components/RecipeContainer/style";
+import { NameInput, QuantityInput, Select, Form } from "./style";
 
 export default function EditableIngredients(props) {
   return (
@@ -19,7 +20,7 @@ export default function EditableIngredients(props) {
   );
 }
 
-function EditableIngredientItem({ item, onChange }) {
+function EditableIngredientItem({ item, onChange, onDelete }) {
   const getInputProps = useCallback(
     (item, field) => {
       return {
@@ -33,9 +34,21 @@ function EditableIngredientItem({ item, onChange }) {
     [onChange]
   );
   return (
-    <div>
-      <input {...getInputProps(item, "quantity")}></input>
-      <input {...getInputProps(item, "name")}></input>
-    </div>
+    <Form>
+      <QuantityInput {...getInputProps(item, "quantity")}></QuantityInput>
+      <Select value={item.units} onChange={onChange}>
+        <option value="grams">g</option>
+        <option value="milliLitres">ml</option>
+        <option value="tableSpoons">tbsp</option>
+        <option value="teaSpoons">tsp</option>
+        <option value="tableSpoons">tbsp</option>
+        <option value="pinch">Pinch</option>
+        <option value="dash">Dash</option>
+      </Select>
+      <NameInput {...getInputProps(item, "name")}></NameInput>
+      <button onClick={onDelete} type="button">
+        -
+      </button>
+    </Form>
   );
 }

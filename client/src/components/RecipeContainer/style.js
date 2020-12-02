@@ -11,11 +11,13 @@ export const ListContainer = styled.div`
   text-align: left;
 `;
 
+export const ListItem = styled.li`
+  margin: 20px 0;
+`;
+
 export const BodyContainer = styled.section`
-  width: 80%;
-  margin-left: auto;
-  margin-right: auto;
-  text-align: center;
+  width: 70%;
+  text-align: left;
 `;
 
 export const EditButtonContainer = styled.div`
