@@ -34,12 +34,12 @@ export default function RecipeForm(props) {
         <form onSubmit={handleSubmit} onReset={handleReset}>
           <RecipeFormHeader {...state} onChange={dispatch} />
           <RecipeFormBody {...state} onChange={dispatch} />
+          <ButtonContainer>
+            <Button type="submit">Save</Button>
+            <Button type="reset">Reset</Button>
+          </ButtonContainer>
         </form>
       </BodyContainer>
-      <ButtonContainer>
-        <Button type="submit">Save</Button>
-        <Button type="reset">Reset</Button>
-      </ButtonContainer>
     </div>
   );
 }
