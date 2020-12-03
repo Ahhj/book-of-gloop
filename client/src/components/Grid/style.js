@@ -22,5 +22,4 @@ export const Column = styled.div`
   @media only screen and (min-width: 800px) {
     width: ${(props) => (props.span ? (props.span / 12) * 100 : "8.33")}%;
   }
-
 `;

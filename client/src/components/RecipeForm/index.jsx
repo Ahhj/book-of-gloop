@@ -26,10 +26,12 @@ export default function RecipeForm(props) {
   const handleReset = useCallback(() => dispatch({ type: "reset" }), []);
 
   return (
-    <FormContainer onSubmit={handleSubmit} onReset={handleReset}>
-      <RecipeFormHeader {...state} onChange={dispatch} />
-      <RecipeFormBody {...state} onChange={dispatch} />
-      <RecipeFormButtons />
+    <FormContainer>
+      <form onSubmit={handleSubmit} onReset={handleReset}>
+        <RecipeFormHeader {...state} onChange={dispatch} />
+        <RecipeFormBody {...state} onChange={dispatch} />
+        <RecipeFormButtons />
+      </form>
     </FormContainer>
   );
 }
@@ -75,7 +77,7 @@ function stateReducer(state, action) {
 function RecipeFormButtons() {
   return (
     <Row>
-      <Column span="12">
+      <Column span="2">
         <Button type="submit">Save</Button>
         <Button type="reset">Reset</Button>
       </Column>

@@ -32,12 +32,14 @@ export default function RecipeFormBody({
     <BodyContainer>
       <Row>
         <Column span="6">
+          <span />
           <ImageDropZone
             image={image}
             onChange={(value) => onChange({ key: "image", value })}
           ></ImageDropZone>
         </Column>
         <Column span="6">
+          <span />
           <MDEditor.Markdown source={"### Ingredients"} />
           <MDEditor
             value={ingredients}
@@ -49,6 +51,7 @@ export default function RecipeFormBody({
       </Row>
       <Row>
         <Column span="12">
+          <span />
           <MDEditor.Markdown source={"### Steps"} />
           <MDEditor
             value={steps}

@@ -2,10 +2,9 @@ import styled from "styled-components";
 
 export const Button = styled.button``;
 
-export const BodyContainer = styled.section`
+export const BodyContainer = styled.div`
   width: 70%;
-  text-align: left;
-  padding-left: 5%;
+  text-align: center;
 `;
 
 export const EditButtonContainer = styled.div`
