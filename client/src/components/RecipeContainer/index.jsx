@@ -37,13 +37,18 @@ export default function RecipeContainer() {
         // Handle pre-markdown files
         if (key === "ingredients") {
           if (Array.isArray(data[key])) {
-            value = data[key].map((item) => `- ${item.quantity} ${item.name}`);
+            value = data[key].map((item) =>
+              `- ${item.quantity} ${item.name}`.join("\n")
+            );
           }
         } else if (key === "steps") {
           if (Array.isArray(data[key])) {
-            value = data[key].map((item) => `1. ${item.description}\n`);
+            value = data[key].map((item) =>
+              `1. ${item.description}`.join("\n")
+            );
           }
         }
+
         dispatch({ key, value });
       }
     },
