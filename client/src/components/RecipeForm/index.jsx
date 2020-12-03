@@ -1,7 +1,10 @@
 import React, { useReducer, useCallback } from "react";
 import PropTypes from "prop-types";
-import { Row, Column } from "components/Grid";
-import { FormContainer, Button } from "./style";
+import { Button } from "./style";
+import {
+  BodyContainer,
+  ButtonContainer,
+} from "components/RecipeContainer/style";
 import RecipeFormBody from "./components/RecipeFormBody";
 import RecipeFormHeader from "./components/RecipeFormHeader";
 
@@ -26,13 +29,18 @@ export default function RecipeForm(props) {
   const handleReset = useCallback(() => dispatch({ type: "reset" }), []);
 
   return (
-    <FormContainer>
-      <form onSubmit={handleSubmit} onReset={handleReset}>
-        <RecipeFormHeader {...state} onChange={dispatch} />
-        <RecipeFormBody {...state} onChange={dispatch} />
-        <RecipeFormButtons />
-      </form>
-    </FormContainer>
+    <div>
+      <BodyContainer>
+        <form onSubmit={handleSubmit} onReset={handleReset}>
+          <RecipeFormHeader {...state} onChange={dispatch} />
+          <RecipeFormBody {...state} onChange={dispatch} />
+        </form>
+      </BodyContainer>
+      <ButtonContainer>
+        <Button type="submit">Save</Button>
+        <Button type="reset">Reset</Button>
+      </ButtonContainer>
+    </div>
   );
 }
 
@@ -72,15 +80,4 @@ function stateReducer(state, action) {
       newState[key] = value;
       return newState;
   }
-}
-
-function RecipeFormButtons() {
-  return (
-    <Row>
-      <Column span="2">
-        <Button type="submit">Save</Button>
-        <Button type="reset">Reset</Button>
-      </Column>
-    </Row>
-  );
 }

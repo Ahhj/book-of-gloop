@@ -3,7 +3,6 @@ import PropTypes from "prop-types";
 import MDEditor, { commands } from "@uiw/react-md-editor";
 import ImageDropZone from "components/ImageDropZone";
 import { Row, Column } from "components/Grid";
-import { BodyContainer } from "./style";
 
 /**
  * Component for the recipe form body.
@@ -29,7 +28,7 @@ export default function RecipeFormBody({
     commands.fullscreen,
   ];
   return (
-    <BodyContainer>
+    <div>
       <Row>
         <Column span="6">
           <span />
@@ -61,7 +60,7 @@ export default function RecipeFormBody({
           ></MDEditor>
         </Column>
       </Row>
-    </BodyContainer>
+    </div>
   );
 }
 

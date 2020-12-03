@@ -3,7 +3,7 @@ import { useParams, useHistory } from "react-router-dom";
 import { useGetWithAuth0, useMutateWithAuth0 } from "../../hooks/restful-auth0";
 import Recipe from "components/Recipe";
 import RecipeForm from "components/RecipeForm";
-import { Button, EditButtonContainer } from "./style";
+import { Button, ButtonContainer } from "./style";
 
 /**
  * Interacts with API to provide data for
@@ -115,11 +115,11 @@ export default function RecipeContainer() {
           )}
         </div>
       )}
-      <EditButtonContainer>
+      <ButtonContainer>
         {!editable ? (
           <Button onClick={() => setEditable(!editable)}>Edit</Button>
         ) : null}
-      </EditButtonContainer>
+      </ButtonContainer>
     </div>
   );
 }
