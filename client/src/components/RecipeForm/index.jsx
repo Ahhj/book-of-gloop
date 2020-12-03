@@ -14,11 +14,22 @@ import RecipeFormHeader from "./components/RecipeFormHeader";
  */
 export default function RecipeForm(props) {
   const { title, intro, remarks, tags, image, ingredients, steps } = props;
+  const init = initializeState({
+    title,
+    intro,
+    remarks,
+    tags,
+    image,
+    ingredients,
+    steps,
+  });
 
   const [state, dispatch] = useReducer(
     (state, action) => stateReducer(state, action),
-    { title, intro, remarks, tags, image, ingredients, steps },
-    () => initState(props)
+    { ...init, init },
+    () => {
+      return { ...initializeState(init), init };
+    }
   );
 
   const handleSubmit = useCallback((e) => props.onSubmit(e, state), [
@@ -58,7 +69,15 @@ RecipeForm.propTypes = {
 /**
  * Initialize the recipe form state.
  */
-function initState({ title, intro, remarks, tags, image, ingredients, steps }) {
+function initializeState({
+  title,
+  intro,
+  remarks,
+  tags,
+  image,
+  ingredients,
+  steps,
+}) {
   ingredients = ingredients ? ingredients : "";
   steps = steps ? steps : "";
   return { title, intro, remarks, tags, image, ingredients, steps };
@@ -73,7 +92,7 @@ function initState({ title, intro, remarks, tags, image, ingredients, steps }) {
 function stateReducer(state, action) {
   switch (action.type) {
     case "reset":
-      return initState();
+      return { ...state.init, init: state.init };
     default:
       const { key, value } = action;
       let newState = { ...state };
