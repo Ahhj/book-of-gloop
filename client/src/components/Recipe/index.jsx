@@ -6,6 +6,9 @@ import {
   ListHeader,
   ListItem,
   BodyContainer,
+  SubListHeader,
+  OrderedList,
+  UnorderedList,
 } from "../RecipeContainer/style";
 
 /**
@@ -22,57 +25,90 @@ export default function Recipe({
   steps,
 }) {
   return (
-    <div>
+    <BodyContainer>
       <Title>{title}</Title>
       {intro ? <Intro>{intro}</Intro> : null}
       {remarks ? <Remarks>{remarks}</Remarks> : null}
       {tags ? <Tags>{(tags ? tags : []).join(",")}</Tags> : null}
-      <BodyContainer>
-        <Row>
-          <Column span={`${image ? "6" : "0"}`}>
-            <Image src={image}></Image>
-          </Column>
-          <Column span={"6"}>
-            <Ingredients
-              ingredients={ingredients ? ingredients : []}
-            ></Ingredients>
-          </Column>
-        </Row>
-        <Row>
-          <Column span={`${image ? "12" : "6"}`}>
-            <Steps steps={steps ? steps : []}></Steps>
-          </Column>
-        </Row>
-      </BodyContainer>
-    </div>
+      <Row>
+        <Column span={`${image ? "6" : "0"}`}>
+          <Image src={image} />
+        </Column>
+        <Column span={"6"}>
+          <IngredientList items={ingredients ? ingredients : []} />
+        </Column>
+      </Row>
+      <Row>
+        <Column span={`${image ? "12" : "6"}`}>
+          <StepList items={steps ? steps : []} />
+        </Column>
+      </Row>
+    </BodyContainer>
   );
 }
 
-function Ingredients({ ingredients }) {
+function IngredientList(props) {
   return (
-    <ListContainer>
-      <ul>
-        <ListHeader>Ingredients</ListHeader>
-        {ingredients.map(({ quantity, units, name }, index) => (
-          <li key={index}>
-            {quantity}
-            {units ? units : ""} {name}
-          </li>
-        ))}
-      </ul>
-    </ListContainer>
+    <ListOfLists
+      header={"Ingredients"}
+      isOrdered={false}
+      ListItemComponent={IngredientItemComponent}
+      {...props}
+    />
   );
 }
 
-function Steps({ steps }) {
+function StepList(props) {
+  return (
+    <ListOfLists
+      header={"Steps"}
+      isOrdered={true}
+      ListItemComponent={StepItemComponent}
+      {...props}
+    />
+  );
+}
+
+function IngredientItemComponent({ key, quantity, units, name }) {
+  return (
+    <ListItem key={key}>
+      {quantity}
+      {units ? units : ""} {name}
+    </ListItem>
+  );
+}
+
+function StepItemComponent({ key, description }) {
+  return <ListItem key={key}>{description}</ListItem>;
+}
+
+function ListOfLists({
+  items,
+  header,
+  isSubList,
+  isOrdered,
+  ListItemComponent,
+}) {
+  const HeaderComponent = !isSubList ? ListHeader : SubListHeader;
+  const ListComponent = isOrdered ? OrderedList : UnorderedList;
   return (
     <ListContainer>
-      <ol>
-        <ListHeader>Steps</ListHeader>
-        {steps.map(({ description }, index) => (
-          <ListItem key={index}>{description}</ListItem>
-        ))}
-      </ol>
+      <ListComponent>
+        <HeaderComponent>{header}</HeaderComponent>
+        {items.map((item, index) =>
+          item.items ? (
+            <ListOfLists
+              isSubList={true}
+              header={item.header}
+              items={item.items}
+              isOrdered={isOrdered}
+              ListItemComponent={ListItemComponent}
+            />
+          ) : (
+            <ListItemComponent key={index} {...item} />
+          )
+        )}
+      </ListComponent>
     </ListContainer>
   );
 }

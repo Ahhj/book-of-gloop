@@ -18,13 +18,18 @@ const recipeData = {
       quantity: "10 gallons",
     },
     {
-      name: "Slop",
-      quantity: "100kg",
-    },
-    {
-      name: "More slop More slop More slop",
-      quantity: "100",
-      units: "g",
+      header: "For the slop",
+      items: [
+        {
+          name: "Slop",
+          quantity: "100kg",
+        },
+        {
+          name: "More slop More slop More slop",
+          quantity: "100",
+          units: "g",
+        },
+      ],
     },
   ],
   steps: [
@@ -35,9 +40,16 @@ const recipeData = {
       updatedAt: new Date(2018, 0, 1, 9, 0),
     },
     {
-      description: "Gloop the gloop",
+      header: "For the gloop",
       order: 2,
       updatedAt: new Date(2018, 0, 1, 9, 0),
+      items: [
+        {
+          description: "Gloop the gloop",
+          order: 1,
+          updatedAt: new Date(2018, 0, 1, 9, 0),
+        },
+      ],
     },
   ],
 };

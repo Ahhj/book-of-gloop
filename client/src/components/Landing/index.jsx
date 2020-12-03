@@ -12,8 +12,8 @@ import { ReactPhotoCollage } from "react-photo-collage";
 
 export default function Landing() {
   const setting = {
-    width: "80%",
-    height: ["300px", "300px", "300px", "300px"],
+    width: "100%",
+    height: ["400px", "400px", "400px", "400px"],
     layout: [1, 2, 1, 2],
     photos: [
       { src: baking },
