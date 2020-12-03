@@ -38,13 +38,18 @@ export default function RecipeContainer() {
         if (key === "ingredients") {
           if (Array.isArray(data[key])) {
             value = data[key]
-              .map((item) => `- ${item.quantity} ${item.name}`)
+              .map(
+                (item) =>
+                  `- ${item.quantity ? item.quantity : ""} ${
+                    item.name ? item.name : ""
+                  }`
+              )
               .join("\n");
           }
         } else if (key === "steps") {
           if (Array.isArray(data[key])) {
             value = data[key]
-              .map((item) => `1. ${item.description}`)
+              .map((item) => `1. ${item.description ? item.description : ""}`)
               .join("\n");
           }
         }
