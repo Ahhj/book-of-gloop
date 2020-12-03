@@ -25,7 +25,7 @@ export const DropZoneContainer = styled.div`
   color: #bdbdbd;
   outline: none;
   transition: border 0.24s ease-in-out;
-  width: 100%;
+  width: 90%;
 `;
 
 export const ThumbsContainer = styled.aside`

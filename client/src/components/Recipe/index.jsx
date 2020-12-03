@@ -1,15 +1,8 @@
 import React from "react";
 import { Row, Column } from "../Grid";
 import { Title, Intro, Remarks, Tags, Image } from "./style";
-import {
-  ListContainer,
-  ListHeader,
-  ListItem,
-  BodyContainer,
-  SubListHeader,
-  OrderedList,
-  UnorderedList,
-} from "../RecipeContainer/style";
+import { BodyContainer } from "../RecipeContainer/style";
+import MDEditor from "@uiw/react-md-editor";
 
 /**
  * Recipe component.
@@ -35,80 +28,16 @@ export default function Recipe({
           <Image src={image} />
         </Column>
         <Column span={"6"}>
-          <IngredientList items={ingredients ? ingredients : []} />
+          <MDEditor.Markdown source={"### Ingredients"} />
+          <MDEditor.Markdown source={ingredients ? ingredients : ""} />
         </Column>
       </Row>
       <Row>
         <Column span={`${image ? "12" : "6"}`}>
-          <StepList items={steps ? steps : []} />
+          <MDEditor.Markdown source={"### Steps"} />
+          <MDEditor.Markdown source={steps ? steps : ""} />
         </Column>
       </Row>
     </BodyContainer>
-  );
-}
-
-function IngredientList(props) {
-  return (
-    <ListOfLists
-      header={"Ingredients"}
-      isOrdered={false}
-      ListItemComponent={IngredientItemComponent}
-      {...props}
-    />
-  );
-}
-
-function StepList(props) {
-  return (
-    <ListOfLists
-      header={"Steps"}
-      isOrdered={true}
-      ListItemComponent={StepItemComponent}
-      {...props}
-    />
-  );
-}
-
-function IngredientItemComponent({ key, quantity, units, name }) {
-  return (
-    <ListItem key={key}>
-      {quantity}
-      {units ? units : ""} {name}
-    </ListItem>
-  );
-}
-
-function StepItemComponent({ key, description }) {
-  return <ListItem key={key}>{description}</ListItem>;
-}
-
-function ListOfLists({
-  items,
-  header,
-  isSubList,
-  isOrdered,
-  ListItemComponent,
-}) {
-  const HeaderComponent = !isSubList ? ListHeader : SubListHeader;
-  const ListComponent = isOrdered ? OrderedList : UnorderedList;
-  return (
-    <ListContainer>
-      <ListComponent>
-        <HeaderComponent>{header}</HeaderComponent>
-        {items.map((item, index) =>
-          item.items ? (
-            <ListOfLists
-              isSubList={true}
-              header={item.header}
-              items={item.items}
-              isOrdered={isOrdered}
-              ListItemComponent={ListItemComponent}
-            />
-          ) : (
-            <ListItemComponent key={index} {...item} />
-          )
-        )}
-      </ListComponent>
-    </ListContainer>
   );
 }

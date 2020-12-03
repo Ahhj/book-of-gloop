@@ -12,46 +12,8 @@ const recipeData = {
   intro: "This is some yummy gloop",
   remarks: "Its real yummy",
   image: okonomiyaki,
-  ingredients: [
-    {
-      name: "Gloop",
-      quantity: "10 gallons",
-    },
-    {
-      header: "For the slop",
-      items: [
-        {
-          name: "Slop",
-          quantity: "100kg",
-        },
-        {
-          name: "More slop More slop More slop",
-          quantity: "100",
-          units: "g",
-        },
-      ],
-    },
-  ],
-  steps: [
-    {
-      description:
-        "Slop the slop Slop the slop Slop the slop Slop the slop Slop the slop Slop the slop Slop the slop ",
-      order: 1,
-      updatedAt: new Date(2018, 0, 1, 9, 0),
-    },
-    {
-      header: "For the gloop",
-      order: 2,
-      updatedAt: new Date(2018, 0, 1, 9, 0),
-      items: [
-        {
-          description: "Gloop the gloop",
-          order: 1,
-          updatedAt: new Date(2018, 0, 1, 9, 0),
-        },
-      ],
-    },
-  ],
+  ingredients: "Gloop",
+  steps: "1. Gloop the gloop \n2. Slop the slop",
 };
 
 export const Default = () => <Recipe {...recipeData} />;

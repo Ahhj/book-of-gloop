@@ -49,8 +49,8 @@ RecipeForm.propTypes = {
  * Initialize the recipe form state.
  */
 function initState({ title, intro, remarks, tags, image, ingredients, steps }) {
-  ingredients = ingredients ? ingredients : [];
-  steps = steps ? steps : [];
+  ingredients = ingredients ? ingredients : "";
+  steps = steps ? steps : "";
   return { title, intro, remarks, tags, image, ingredients, steps };
 }
 

@@ -26,5 +26,5 @@ export const Tags = styled.p`
 
 export const Image = styled.img`
   display: inline-block;
-  width: 100%;
+  width: 90%;
 `;

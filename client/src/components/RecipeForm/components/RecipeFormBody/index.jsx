@@ -1,51 +1,62 @@
-import React, { useCallback } from "react";
+import React from "react";
 import PropTypes from "prop-types";
+import MDEditor, { commands } from "@uiw/react-md-editor";
 import ImageDropZone from "components/ImageDropZone";
 import { Row, Column } from "components/Grid";
-import EditableIngredients from "./components/EditableIngredients";
-import EditableSteps from "./components/EditableSteps";
 import { BodyContainer } from "./style";
 
 /**
  * Component for the recipe form body.
  * @param {*} props
  */
-export default function RecipeFormBody(props) {
-  const handleChangeField = useCallback(
-    (key, value) => props.onChange({ key, value }),
-    [props]
-  );
-
-  const handleChangeImage = (image) => handleChangeField("image", image);
-
-  const handleChangeIngredients = (items) =>
-    handleChangeField("ingredients", items);
-
-  const handleChangeSteps = (items) => handleChangeField("steps", items);
-
+export default function RecipeFormBody({
+  image,
+  ingredients,
+  steps,
+  onChange,
+}) {
+  const markdownCommands = [
+    commands.bold,
+    commands.italic,
+    commands.strikethrough,
+    commands.link,
+    commands.orderedListCommand,
+    commands.unorderedListCommand,
+    commands.checkedListCommand,
+    commands.codeEdit,
+    commands.codeLive,
+    commands.codePreview,
+    commands.fullscreen,
+  ];
   return (
     <BodyContainer>
       <Row>
         <Column span="6">
-            <ImageDropZone
-              image={props.image}
-              onChange={(image) => handleChangeImage(image)}
-            ></ImageDropZone>
+          <ImageDropZone
+            image={image}
+            onChange={(value) => onChange({ key: "image", value })}
+          ></ImageDropZone>
         </Column>
         <Column span="6">
-          <EditableIngredients
-            items={props.ingredients}
-            onChange={(items) => handleChangeIngredients(items)}
-          ></EditableIngredients>
+          <MDEditor.Markdown source={"### Ingredients"} />
+          <MDEditor
+            value={ingredients}
+            onChange={(value) => onChange({ key: "ingredients", value })}
+            preview={"edit"}
+            commands={markdownCommands}
+          ></MDEditor>
         </Column>
       </Row>
       <Row>
         <Column span="12">
-            <EditableSteps
-              items={props.steps}
-              onChange={(items) => handleChangeSteps(items)}
-            ></EditableSteps>
-            </Column>
+          <MDEditor.Markdown source={"### Steps"} />
+          <MDEditor
+            value={steps}
+            onChange={(value) => onChange({ key: "steps", value })}
+            preview={"edit"}
+            commands={markdownCommands}
+          ></MDEditor>
+        </Column>
       </Row>
     </BodyContainer>
   );
@@ -53,7 +64,7 @@ export default function RecipeFormBody(props) {
 
 RecipeFormBody.propTypes = {
   image: PropTypes.string,
-  ingredients: PropTypes.arrayOf(PropTypes.object),
-  steps: PropTypes.arrayOf(PropTypes.object),
+  ingredients: PropTypes.string,
+  steps: PropTypes.string,
   onChange: PropTypes.func,
 };

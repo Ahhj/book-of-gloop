@@ -32,7 +32,18 @@ export default function RecipeContainer() {
     lazy: creating,
     resolve: (data) => {
       for (let key in data) {
-        const value = data[key];
+        var value = data[key];
+
+        // Handle pre-markdown files
+        if (key === "ingredients") {
+          if (Array.isArray(data[key])) {
+            value = data[key].map((item) => `- ${item.quantity} ${item.name}`);
+          }
+        } else if (key === "steps") {
+          if (Array.isArray(data[key])) {
+            value = data[key].map((item) => `1. ${item.description}\n`);
+          }
+        }
         dispatch({ key, value });
       }
     },
