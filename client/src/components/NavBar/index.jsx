@@ -28,10 +28,10 @@ export function AuthNavBar() {
       to: !isAuthenticated ? "/login" : "/logout",
       name: !isAuthenticated ? "Login" : "Logout",
     },
+    { to: "/", name: "Home", exact: true },
   ];
   if (isAuthenticated) {
     navItems = navItems.concat(
-      { to: "/", name: "Home", exact: true },
       { to: "/contents", name: "Recipes" },
       { to: "/recipe/new", name: "New" }
     );

@@ -10,9 +10,7 @@ const PrivateRoute = ({ path, component: Component, ...rest }) => {
       return;
     } else {
       (async () => {
-        await loginWithRedirect({
-          appState: { targetUrl: window.location.pathname },
-        });
+        await loginWithRedirect({});
       })();
     }
   }, [loading, isAuthenticated, loginWithRedirect, path]);
