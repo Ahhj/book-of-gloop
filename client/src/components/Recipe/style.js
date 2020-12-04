@@ -47,16 +47,13 @@ export const ImageContainer = styled.div`
   }
   @media only screen and (min-width: 600px) {
     float: left;
-    width: 50%;
+    width: ${(props) => (props.span ? props.span * 100 : "100")}%;
   }
 `;
 
 export const IngredientsContainer = styled.div`
   display: block;
   text-align: left;
-  ul {
-    columns: 1 auto;
-  }
   li {
     margin: 0px 0;
   }
@@ -64,17 +61,23 @@ export const IngredientsContainer = styled.div`
   @media only screen and (min-width: 300px) {
     float: left;
     width: 100%;
+    ul {
+      columns: 2 auto;
+    }
   }
 
   @media only screen and (min-width: 600px) {
     align-items: center;
     justify-content: center;
-    width: 50%;
+    width: ${(props) => (props.span ? props.span * 100 : "100")}%;
+    ul {
+      columns: 1 auto;
+    }
   }
 `;
 
 export const StepsContainer = styled.div`
-  width: 100%;
+  width: ${(props) => (props.span ? props.span * 100 : "100")}%;
   text-align: left;
   float: left;
   align-items: center;

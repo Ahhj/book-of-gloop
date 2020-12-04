@@ -11,7 +11,6 @@ const recipeData = {
   tags: ["gloop", "slop"],
   intro: "This is some yummy gloop",
   remarks: "Its real yummy",
-  image: okonomiyaki,
   ingredients: `
 - 2 tblsp olive oil
 - 1 red onion
@@ -53,4 +52,8 @@ const recipeData = {
 1. Serve with a couple of jalapenos on top and a dollop of sour cream`,
 };
 
-export const Default = () => <Recipe {...recipeData} />;
+export const Default = () => (
+  <Recipe {...{ ...recipeData, image: okonomiyaki }} />
+);
+
+export const NoImage = () => <Recipe {...recipeData} />;

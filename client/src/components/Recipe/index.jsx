@@ -29,18 +29,18 @@ export default function Recipe({
       {remarks ? <Remarks>{remarks}</Remarks> : null}
       {tags ? <Tags>{(tags ? tags : []).join(",")}</Tags> : null}
       <Row>
-        <ImageContainer span={`${image ? "6" : "0"}`}>
+        <ImageContainer span={`${image ? "0.7" : "0"}`}>
           <p />
           <Image src={image} />
         </ImageContainer>
-        <IngredientsContainer span={"6"}>
+        <IngredientsContainer span={"0.3"}>
           <p />
           <MarkdownArea source={"### Ingredients"} />
           <MarkdownArea source={ingredients ? ingredients : ""} />
         </IngredientsContainer>
       </Row>
       <Row>
-        <StepsContainer span={`${image ? "12" : "6"}`}>
+        <StepsContainer span={`${image ? "1" : "0.7"}`}>
           <p />
           <MarkdownArea source={"### Steps"} />
           <MarkdownArea source={steps ? steps : ""} />
