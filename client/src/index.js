@@ -45,6 +45,7 @@ ReactDOM.render(
     redirect_uri={window.location.origin}
     audience={process.env.REACT_APP_AUTH0_AUDIENCE}
     onRedirectCallback={onRedirectCallback}
+    useRefreshTokens={true}
   >
     <GlobalStyle />
     <App />
