@@ -36,14 +36,14 @@ export default function RecipeFormBody({
   return (
     <div>
       <Row>
-        <ImageContainer>
+        <ImageContainer span={"0.7"}>
           <p />
           <ImageDropZone
             image={image}
             onChange={(value) => onChange({ key: "image", value })}
           ></ImageDropZone>
         </ImageContainer>
-        <IngredientsContainer>
+        <IngredientsContainer span={"0.3"}>
           <p />
           <MarkdownArea source={"### Ingredients"} />
           <MDEditor
