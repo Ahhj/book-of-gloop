@@ -2,8 +2,12 @@ import React from "react";
 import { Row } from "../Grid";
 import { Title, Intro, Remarks, Tags, Image } from "./style";
 import { BodyContainer } from "../RecipeContainer/style";
-import MDEditor from "@uiw/react-md-editor";
-import { ImageContainer, StepsContainer, IngredientsContainer } from "./style";
+import {
+  ImageContainer,
+  StepsContainer,
+  IngredientsContainer,
+  MarkdownArea,
+} from "./style";
 
 /**
  * Recipe component.
@@ -31,15 +35,15 @@ export default function Recipe({
         </ImageContainer>
         <IngredientsContainer span={"6"}>
           <p />
-          <MDEditor.Markdown source={"### Ingredients"} />
-          <MDEditor.Markdown source={ingredients ? ingredients : ""} />
+          <MarkdownArea source={"### Ingredients"} />
+          <MarkdownArea source={ingredients ? ingredients : ""} />
         </IngredientsContainer>
       </Row>
       <Row>
         <StepsContainer span={`${image ? "12" : "6"}`}>
           <p />
-          <MDEditor.Markdown source={"### Steps"} />
-          <MDEditor.Markdown source={steps ? steps : ""} />
+          <MarkdownArea source={"### Steps"} />
+          <MarkdownArea source={steps ? steps : ""} />
         </StepsContainer>
       </Row>
     </BodyContainer>

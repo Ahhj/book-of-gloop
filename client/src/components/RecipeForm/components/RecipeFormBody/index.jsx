@@ -7,6 +7,7 @@ import {
   ImageContainer,
   StepsContainer,
   IngredientsContainer,
+  MarkdownArea,
 } from "components/Recipe/style";
 
 /**
@@ -44,7 +45,7 @@ export default function RecipeFormBody({
         </ImageContainer>
         <IngredientsContainer>
           <p />
-          <MDEditor.Markdown source={"### Ingredients"} />
+          <MarkdownArea source={"### Ingredients"} />
           <MDEditor
             value={ingredients}
             onChange={(value) => onChange({ key: "ingredients", value })}
@@ -56,7 +57,7 @@ export default function RecipeFormBody({
       <Row>
         <StepsContainer>
           <p />
-          <MDEditor.Markdown source={"### Steps"} />
+          <MarkdownArea source={"### Steps"} />
           <MDEditor
             value={steps}
             onChange={(value) => onChange({ key: "steps", value })}

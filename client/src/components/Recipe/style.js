@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import MDEditor from "@uiw/react-md-editor";
 
 export const Title = styled.h1`
   text-align: center;
@@ -71,4 +72,11 @@ export const StepsContainer = styled.div`
   text-align: left;
   float: left;
   align-items: center;
+`;
+
+export const MarkdownArea = styled(MDEditor.Markdown)`
+  font-family: Gill Sans, Arial, sans-serif;
+  li {
+    margin: 15px 0;
+  }
 `;
