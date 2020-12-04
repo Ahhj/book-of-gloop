@@ -3,8 +3,12 @@ import { useParams, useHistory } from "react-router-dom";
 import { useGetWithAuth0, useMutateWithAuth0 } from "../../hooks/restful-auth0";
 import Recipe from "components/Recipe";
 import RecipeForm from "components/RecipeForm";
-import { Button, EditButtonContainer } from "./style";
+import { Button, ButtonContainer } from "./style";
 
+/**
+ * Interacts with API to provide data for
+ * Recipe or RecipeForm components
+ */
 export default function RecipeContainer() {
   let history = useHistory(); // For redirect
   let { recipeId } = useParams();
@@ -28,7 +32,28 @@ export default function RecipeContainer() {
     lazy: creating,
     resolve: (data) => {
       for (let key in data) {
-        const value = data[key];
+        var value = data[key];
+
+        // Handle pre-markdown files
+        if (key === "ingredients") {
+          if (Array.isArray(data[key])) {
+            value = data[key]
+              .map(
+                (item) =>
+                  `- ${item.quantity ? item.quantity : ""} ${
+                    item.name ? item.name : ""
+                  }`
+              )
+              .join("\n");
+          }
+        } else if (key === "steps") {
+          if (Array.isArray(data[key])) {
+            value = data[key]
+              .map((item) => `1. ${item.description ? item.description : ""}`)
+              .join("\n");
+          }
+        }
+
         dispatch({ key, value });
       }
     },
@@ -60,7 +85,7 @@ export default function RecipeContainer() {
             dispatch({ key, value });
           }
         } else {
-          // Create through API and ridrect to new recipe.
+          // Create through API and redirect to new recipe.
           create({ data: result }).then(({ fileId }) => {
             history.push(`/recipe/${fileId}`);
           });
@@ -90,11 +115,11 @@ export default function RecipeContainer() {
           )}
         </div>
       )}
-      <EditButtonContainer>
+      <ButtonContainer>
         {!editable ? (
           <Button onClick={() => setEditable(!editable)}>Edit</Button>
         ) : null}
-      </EditButtonContainer>
+      </ButtonContainer>
     </div>
   );
 }

@@ -1,6 +1,5 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import { Redirect } from "react-router-dom";
 import App from "./App";
 import * as serviceWorker from "./serviceWorker";
 import { Auth0Provider } from "./react-auth0-spa";
@@ -8,7 +7,7 @@ import { createGlobalStyle } from "styled-components";
 
 const GlobalStyle = createGlobalStyle`
   body {
-    font-family: Palatino Linotype, Book Antiqua, Palatino, serif;
+    font-family: Gill Sans, Arial, sans-serif;
   }
 
   button {
@@ -29,22 +28,13 @@ const GlobalStyle = createGlobalStyle`
   }
 `;
 
-// Route the user to the right place after login
-const onRedirectCallback = (appState) => {
-  const path =
-    appState && appState.targetUrl
-      ? appState.targetUrl
-      : window.location.pathname;
-  return <Redirect to={path} />;
-};
-
 ReactDOM.render(
   <Auth0Provider
     domain={process.env.REACT_APP_AUTH0_DOMAIN}
     client_id={process.env.REACT_APP_AUTH0_CLIENT_ID}
     redirect_uri={window.location.origin}
     audience={process.env.REACT_APP_AUTH0_AUDIENCE}
-    onRedirectCallback={onRedirectCallback}
+    useRefreshTokens={true}
   >
     <GlobalStyle />
     <App />

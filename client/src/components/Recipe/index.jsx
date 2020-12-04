@@ -1,12 +1,18 @@
 import React from "react";
-import { Row, Column } from "../Grid";
+import { Row } from "../Grid";
 import { Title, Intro, Remarks, Tags, Image } from "./style";
+import { BodyContainer } from "../RecipeContainer/style";
 import {
-  ListContainer,
-  ListHeader,
-  BodyContainer,
-} from "../RecipeContainer/style";
+  ImageContainer,
+  StepsContainer,
+  IngredientsContainer,
+  MarkdownArea,
+} from "./style";
 
+/**
+ * Recipe component.
+ * @param {*} param0
+ */
 export default function Recipe({
   title,
   intro,
@@ -17,54 +23,29 @@ export default function Recipe({
   steps,
 }) {
   return (
-    <div>
+    <BodyContainer>
       <Title>{title}</Title>
       {intro ? <Intro>{intro}</Intro> : null}
       {remarks ? <Remarks>{remarks}</Remarks> : null}
       {tags ? <Tags>{(tags ? tags : []).join(",")}</Tags> : null}
-      <BodyContainer>
-        <Row>
-          <Column span={`${image ? "6" : "0"}`}>
-            <Image src={image}></Image>
-          </Column>
-          <Column span={`${image ? "2" : "4"}`}>
-            <Ingredients
-              ingredients={ingredients ? ingredients : []}
-            ></Ingredients>
-          </Column>
-          <Column span={`${image ? "4" : "8"}`}>
-            <Steps steps={steps ? steps : []}></Steps>
-          </Column>
-        </Row>
-      </BodyContainer>
-    </div>
-  );
-}
-
-function Ingredients({ ingredients }) {
-  return (
-    <ListContainer>
-      <ul>
-        <ListHeader>Ingredients</ListHeader>
-        {ingredients.map(({ quantity, name }, index) => (
-          <li key={index}>
-            {quantity} {name}
-          </li>
-        ))}
-      </ul>
-    </ListContainer>
-  );
-}
-
-function Steps({ steps }) {
-  return (
-    <ListContainer>
-      <ol>
-        <ListHeader>Steps</ListHeader>
-        {steps.map(({ description }, index) => (
-          <li key={index}>{description}</li>
-        ))}
-      </ol>
-    </ListContainer>
+      <Row>
+        <ImageContainer span={`${image ? "0.7" : "0"}`}>
+          <p />
+          <Image src={image} />
+        </ImageContainer>
+        <IngredientsContainer span={"0.3"}>
+          <p />
+          <MarkdownArea source={"### Ingredients"} />
+          <MarkdownArea source={ingredients ? ingredients : ""} />
+        </IngredientsContainer>
+      </Row>
+      <Row>
+        <StepsContainer span={`${image ? "1" : "0.7"}`}>
+          <p />
+          <MarkdownArea source={"### Steps"} />
+          <MarkdownArea source={steps ? steps : ""} />
+        </StepsContainer>
+      </Row>
+    </BodyContainer>
   );
 }

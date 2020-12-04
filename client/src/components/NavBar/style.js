@@ -36,7 +36,7 @@ export const NavItemContainer = styled.div`
   height: ${navBarHeight};
 
   /** make sure the navbar is in front of the content*/
-  z-index: 5;
+  z-index: 100;
 
   background-color: palevioletred;
 `;

@@ -2,6 +2,9 @@ import React, { useState, useCallback } from "react";
 import { useGetWithAuth0 } from "../../hooks/restful-auth0";
 import RecipeList from "components/RecipeList";
 
+/**
+ * Interacts with API to provide data for RecipeList component.
+ */
 export default function RecipeListContainer() {
   const [recipes, setRecipes] = useState([]);
   const [filter, setFilter] = useState("*");

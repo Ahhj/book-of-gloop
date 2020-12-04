@@ -1,7 +1,7 @@
 import React from "react";
 import { useAuth0 } from "./react-auth0-spa";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import Home from "components/Home";
+import Landing from "components/Landing";
 import PrivateRoute from "components/PrivateRoute";
 import RecipeListContainer from "components/RecipeListContainer";
 import RecipeContainer from "components/RecipeContainer";
@@ -33,7 +33,7 @@ function App() {
               component={() => <RecipeContainer />}
             />
             <Route exact path={"/"}>
-              <Home />
+              <Landing />
             </Route>
           </Switch>
         </div>
