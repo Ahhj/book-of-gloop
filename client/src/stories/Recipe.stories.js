@@ -12,7 +12,34 @@ const recipeData = {
   intro: "This is some yummy gloop",
   remarks: "Its real yummy",
   image: okonomiyaki,
-  ingredients: "Gloop",
+  ingredients: `
+- 2 tblsp olive oil
+- 1 red onion
+- 1 red bell pepper
+- 1 small broccoli
+- 1 tsp cumin
+- ¼ tsp cinnamon
+- 200g spinach
+- 1 can black beans
+- 250g cheese
+- ½ tsp salt
+- black pepper
+- 8 tortillas 
+- jalapenos
+- sour cream (optional)
+
+#### 🍶 For the sauce 🍶
+- 3 tblsp olive oil
+- 3 tblsp flour
+- 1 tblsp chili powder
+- ½ tsp garlic powder
+- ¼ tsp oregano
+- ¼ tsp salt
+- pinch of cinnamon
+- 2 tblsp tomato paste
+- 500ml vegetable broth
+- 1 tsp apple cider vinegar
+- black pepper`,
   steps: `
 1. Preheat the oven and lightly grease a 13 by 9-inch pan with olive oil.
 1. In a large skillet over medium heat, cook the onions and a pinch of salt with the olive oil for about 5-7 minutes.

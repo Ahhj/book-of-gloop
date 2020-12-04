@@ -54,6 +54,12 @@ export const ImageContainer = styled.div`
 export const IngredientsContainer = styled.div`
   display: block;
   text-align: left;
+  ul {
+    columns: 1 auto;
+  }
+  li {
+    margin: 0px 0;
+  }
 
   @media only screen and (min-width: 300px) {
     float: left;
@@ -72,11 +78,11 @@ export const StepsContainer = styled.div`
   text-align: left;
   float: left;
   align-items: center;
+  li {
+    margin: 15px 0;
+  }
 `;
 
 export const MarkdownArea = styled(MDEditor.Markdown)`
   font-family: Gill Sans, Arial, sans-serif;
-  li {
-    margin: 15px 0;
-  }
 `;
