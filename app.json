@@ -10,6 +10,7 @@
     "postdeploy": ""
   },
   "env": {
+    "GENERATE_SOURCEMAP": false,
     "GOOGLE_DRIVE_FOLDER_ID": "1l6kXQ7exsaFIcaZlqiQgm7GCXEq9QWKw"
   },
   "addons": [],
