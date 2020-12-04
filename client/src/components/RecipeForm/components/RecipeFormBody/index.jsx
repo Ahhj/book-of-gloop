@@ -2,7 +2,12 @@ import React from "react";
 import PropTypes from "prop-types";
 import MDEditor, { commands } from "@uiw/react-md-editor";
 import ImageDropZone from "components/ImageDropZone";
-import { Row, Column } from "components/Grid";
+import { Row } from "components/Grid";
+import {
+  ImageContainer,
+  StepsContainer,
+  IngredientsContainer,
+} from "components/Recipe/style";
 
 /**
  * Component for the recipe form body.
@@ -30,15 +35,15 @@ export default function RecipeFormBody({
   return (
     <div>
       <Row>
-        <Column span="6">
-          <span />
+        <ImageContainer>
+          <p />
           <ImageDropZone
             image={image}
             onChange={(value) => onChange({ key: "image", value })}
           ></ImageDropZone>
-        </Column>
-        <Column span="6">
-          <span />
+        </ImageContainer>
+        <IngredientsContainer>
+          <p />
           <MDEditor.Markdown source={"### Ingredients"} />
           <MDEditor
             value={ingredients}
@@ -46,11 +51,11 @@ export default function RecipeFormBody({
             preview={"edit"}
             commands={markdownCommands}
           ></MDEditor>
-        </Column>
+        </IngredientsContainer>
       </Row>
       <Row>
-        <Column span="12">
-          <span />
+        <StepsContainer>
+          <p />
           <MDEditor.Markdown source={"### Steps"} />
           <MDEditor
             value={steps}
@@ -58,7 +63,7 @@ export default function RecipeFormBody({
             preview={"edit"}
             commands={markdownCommands}
           ></MDEditor>
-        </Column>
+        </StepsContainer>
       </Row>
     </div>
   );

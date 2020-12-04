@@ -17,6 +17,7 @@ export const DropZoneContainer = styled.div`
   display: inline-block;
   align-items: center;
   padding: 10px;
+  height: 200px;
   border-width: 2px;
   border-radius: 2px;
   border-color: ${(props) => getColor(props)};
