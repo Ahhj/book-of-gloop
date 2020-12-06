@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
-import ReactMde from "react-mde";
 import ImageDropZone from "components/ImageDropZone";
 import { Row } from "components/Grid";
 import {
@@ -9,8 +8,9 @@ import {
   IngredientsContainer,
   StyledMarkdown,
 } from "components/Recipe/style";
+import ReactMde from "react-mde";
 
-import "react-mde/lib/styles/css/react-mde-all.css";
+import "./style.css";
 
 /**
  * Component for the recipe form body.
