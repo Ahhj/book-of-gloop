@@ -6,7 +6,7 @@ import {
   ImageContainer,
   StepsContainer,
   IngredientsContainer,
-  MarkdownArea,
+  StyledMarkdown,
 } from "./style";
 
 /**
@@ -35,15 +35,15 @@ export default function Recipe({
         </ImageContainer>
         <IngredientsContainer span={"0.3"}>
           <p />
-          <MarkdownArea source={"### Ingredients"} />
-          <MarkdownArea source={ingredients ? ingredients : ""} />
+          <StyledMarkdown source={"### Ingredients"} />
+          <StyledMarkdown source={ingredients ? ingredients : ""} />
         </IngredientsContainer>
       </Row>
       <Row>
         <StepsContainer span={`${image ? "1" : "0.7"}`}>
           <p />
-          <MarkdownArea source={"### Steps"} />
-          <MarkdownArea source={steps ? steps : ""} />
+          <StyledMarkdown source={"### Steps"} />
+          <StyledMarkdown source={steps ? steps : ""} />
         </StepsContainer>
       </Row>
     </BodyContainer>

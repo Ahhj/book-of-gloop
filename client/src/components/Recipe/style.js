@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import MDEditor from "@uiw/react-md-editor";
+import ReactMarkdown from "react-markdown";
 
 export const Title = styled.h1`
   text-align: center;
@@ -86,6 +86,6 @@ export const StepsContainer = styled.div`
   }
 `;
 
-export const MarkdownArea = styled(MDEditor.Markdown)`
+export const StyledMarkdown = styled(ReactMarkdown)`
   font-family: Gill Sans, Arial, sans-serif;
 `;

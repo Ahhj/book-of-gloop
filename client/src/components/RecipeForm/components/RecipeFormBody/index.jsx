@@ -1,14 +1,16 @@
-import React from "react";
+import React, { useState } from "react";
 import PropTypes from "prop-types";
-import MDEditor, { commands } from "@uiw/react-md-editor";
+import ReactMde from "react-mde";
 import ImageDropZone from "components/ImageDropZone";
 import { Row } from "components/Grid";
 import {
   ImageContainer,
   StepsContainer,
   IngredientsContainer,
-  MarkdownArea,
+  StyledMarkdown,
 } from "components/Recipe/style";
+
+import "react-mde/lib/styles/css/react-mde-all.css";
 
 /**
  * Component for the recipe form body.
@@ -20,19 +22,15 @@ export default function RecipeFormBody({
   steps,
   onChange,
 }) {
-  const markdownCommands = [
-    commands.bold,
-    commands.italic,
-    commands.strikethrough,
-    commands.link,
-    commands.orderedListCommand,
-    commands.unorderedListCommand,
-    commands.checkedListCommand,
-    commands.codeEdit,
-    commands.codeLive,
-    commands.codePreview,
-    commands.fullscreen,
+  const [selectedTab, setSelectedTab] = useState("write");
+  const generateMarkdownPreview = (markdown) =>
+    Promise.resolve(<StyledMarkdown source={markdown} />);
+  const toolbarCommands = [
+    ["header", "bold", "italic", "strikethrough"],
+    ["link"],
+    ["unordered-list", "ordered-list"],
   ];
+
   return (
     <div>
       <Row>
@@ -45,25 +43,29 @@ export default function RecipeFormBody({
         </ImageContainer>
         <IngredientsContainer span={"0.3"}>
           <p />
-          <MarkdownArea source={"### Ingredients"} />
-          <MDEditor
+          <StyledMarkdown source={"### Ingredients"} />
+          <ReactMde
             value={ingredients}
+            selectedTab={selectedTab}
             onChange={(value) => onChange({ key: "ingredients", value })}
-            preview={"edit"}
-            commands={markdownCommands}
-          ></MDEditor>
+            onTabChange={setSelectedTab}
+            generateMarkdownPreview={generateMarkdownPreview}
+            toolbarCommands={toolbarCommands}
+          ></ReactMde>
         </IngredientsContainer>
       </Row>
       <Row>
         <StepsContainer>
           <p />
-          <MarkdownArea source={"### Steps"} />
-          <MDEditor
+          <StyledMarkdown source={"### Steps"} />
+          <ReactMde
             value={steps}
+            selectedTab={selectedTab}
             onChange={(value) => onChange({ key: "steps", value })}
-            preview={"edit"}
-            commands={markdownCommands}
-          ></MDEditor>
+            onTabChange={setSelectedTab}
+            generateMarkdownPreview={generateMarkdownPreview}
+            toolbarCommands={toolbarCommands}
+          ></ReactMde>
         </StepsContainer>
       </Row>
     </div>
