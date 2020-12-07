@@ -6,40 +6,42 @@ import clams from "assets/images/clams.jpg";
 import washing from "assets/images/washing.jpg";
 import cocktail from "assets/images/cocktail.jpg";
 import kitchen from "assets/images/kitchen.jpg";
-import { Title, Container } from "./style";
-
-import { ReactPhotoCollage } from "react-photo-collage";
+import { Title, TitleContainer, Container, Image, ImageRow } from "./style";
 
 export default function Landing() {
-  const setting = {
-    width: "100%",
-    height: ["400px", "400px", "400px", "400px"],
-    layout: [1, 2, 1, 2],
-    photos: [
-      { src: baking },
-      { src: washing },
-      { src: clams },
-      { src: baking2 },
-      { src: christmas },
-      { src: cocktail },
-    ],
-    showNumOfRemainingPhotos: false,
-  };
-
   return (
-    <section
-      style={{
-        width: "100%",
-        backgroundPosition: "center",
-        backgroundSize: "cover",
-        backgroundRepeat: "no-repeat",
-        backgroundImage: `url(${kitchen})`,
-      }}
-    >
-      <Container>
-        <Title>The Book of Gloop</Title>
-        <ReactPhotoCollage {...setting} />
-      </Container>
-    </section>
+    <div>
+      <section
+        style={{
+          width: "100vw",
+          backgroundPosition: "center",
+          backgroundSize: "cover",
+          backgroundRepeat: "no-repeat",
+          margin: 0,
+          padding: 0,
+          backgroundImage: `url(${kitchen})`,
+        }}
+      >
+        <TitleContainer>
+          <Title>The Book of Gloop</Title>
+        </TitleContainer>
+        <Container>
+          <ImageRow>
+            <Image style={{ width: "100%" }} src={baking} />
+          </ImageRow>
+          <ImageRow>
+            <Image style={{ width: "50%" }} src={washing} />
+            <Image style={{ width: "50%" }} src={clams} />
+          </ImageRow>
+          <ImageRow>
+            <Image style={{ width: "100%" }} src={baking2} />
+          </ImageRow>
+          <ImageRow>
+            <Image style={{ width: "50%" }} src={cocktail} />
+            <Image style={{ width: "50%" }} src={christmas} />
+          </ImageRow>
+        </Container>
+      </section>
+    </div>
   );
 }
