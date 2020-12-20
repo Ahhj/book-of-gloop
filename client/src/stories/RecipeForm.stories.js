@@ -21,6 +21,11 @@ const initialData = {
   remarks: "these are the remarks",
   tags: ["these are some tags tag1", "tag2"],
   image: okonomiyaki,
+  duration: {
+    cook: "1 hour",
+    rest: "5 minutes",
+    prep: "30 minutes",
+  },
 };
 
 export const WithInitialData = () => (

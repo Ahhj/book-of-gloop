@@ -10,15 +10,28 @@ import RecipeFormHeader from "./components/RecipeFormHeader";
 
 /**
  * Component to represent form creating/editing recipes.
- * @param {*} props dictionary of recipe fields (title, intro, remarks, tags, image, ingredients, steps)
+ * @param {*} props dictionary of recipe fields
  */
 export default function RecipeForm(props) {
-  const { title, intro, remarks, tags, image, ingredients, steps } = props;
+  const {
+    title,
+    intro,
+    remarks,
+    tags,
+    duration,
+    serves,
+    image,
+    ingredients,
+    steps,
+  } = props;
+
   const init = initializeState({
     title,
     intro,
     remarks,
     tags,
+    duration,
+    serves,
     image,
     ingredients,
     steps,
@@ -60,6 +73,11 @@ RecipeForm.propTypes = {
   intro: PropTypes.string,
   remarks: PropTypes.string,
   tags: PropTypes.arrayOf(PropTypes.string),
+  serves: PropTypes.number,
+  duration: PropTypes.shape({
+    prep: PropTypes.string,
+    cook: PropTypes.string,
+  }),
   image: PropTypes.string,
   ingredients: PropTypes.arrayOf(PropTypes.object),
   steps: PropTypes.arrayOf(PropTypes.object),
@@ -74,13 +92,25 @@ function initializeState({
   intro,
   remarks,
   tags,
+  duration,
+  serves,
   image,
   ingredients,
   steps,
 }) {
   ingredients = ingredients ? ingredients : "";
   steps = steps ? steps : "";
-  return { title, intro, remarks, tags, image, ingredients, steps };
+  return {
+    title,
+    intro,
+    remarks,
+    tags,
+    duration,
+    serves,
+    image,
+    ingredients,
+    steps,
+  };
 }
 
 /**

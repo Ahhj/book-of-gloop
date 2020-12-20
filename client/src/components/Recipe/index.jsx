@@ -1,6 +1,14 @@
 import React from "react";
 import { Row } from "../Grid";
-import { Title, Intro, Remarks, Tags, Image } from "./style";
+import SummaryPanel from "./components/SummaryPanel";
+import {
+  Title,
+  Intro,
+  Remarks,
+  Tags,
+  Image,
+  SummaryPanelContainer,
+} from "./style";
 import { BodyContainer } from "../RecipeContainer/style";
 import {
   ImageContainer,
@@ -17,6 +25,8 @@ export default function Recipe({
   title,
   intro,
   remarks,
+  duration,
+  serves,
   tags,
   image,
   ingredients,
@@ -25,6 +35,11 @@ export default function Recipe({
   return (
     <BodyContainer>
       <Title>{title}</Title>
+      {!!serves || !!duration ? (
+        <SummaryPanelContainer>
+          <SummaryPanel serves={serves} duration={duration} />
+        </SummaryPanelContainer>
+      ) : null}
       {intro ? <Intro>{intro}</Intro> : null}
       {remarks ? <Remarks>{remarks}</Remarks> : null}
       {tags ? <Tags>{(tags ? tags : []).join(",")}</Tags> : null}

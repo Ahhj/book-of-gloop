@@ -7,23 +7,15 @@ export const TitleInput = styled.input`
   font-weight: lighter;
 `;
 
-export const IntroInput = styled.input`
+export const SubTitleInput = styled.input`
   width: 50%;
   text-align: center;
   font-size: 20px;
   font-weight: lighter;
 `;
 
-export const RemarksInput = styled.input`
-  width: 50%;
-  text-align: center;
-  font-size: 20px;
-  font-weight: lighter;
-`;
-
-export const TagsInput = styled.input`
-  width: 50%;
-  text-align: center;
-  font-size: 20px;
+export const DurationFieldInput = styled.input`
+  text-align: left;
+  font-size: 15px;
   font-weight: lighter;
 `;
