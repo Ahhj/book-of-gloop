@@ -72,6 +72,7 @@ export default function RecipeFormHeader(props) {
           serves={
             <React.Fragment>
               <button
+                type="button"
                 onClick={() =>
                   props.onChange({
                     key: "serves",
@@ -83,6 +84,7 @@ export default function RecipeFormHeader(props) {
               </button>
               {` ${props.serves} `}
               <button
+                type="button"
                 onClick={() =>
                   props.onChange({ key: "serves", value: props.serves + 1 })
                 }
