@@ -69,7 +69,7 @@ export const WithDuration = () => (
 );
 
 export const WithServings = () => (
-  <Recipe {...{ ...recipeData, serves: 2, duration: {} }} />
+  <Recipe {...{ ...recipeData, serves: 2, duration: { cook: "" } }} />
 );
 
 export const WithDurationAndServings = () => (

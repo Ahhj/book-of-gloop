@@ -25,7 +25,7 @@ export default function SummaryPanel({ serves, duration }) {
       {duration ? (
         <PanelContainer>
           <PanelContainer>
-            {Object.keys(duration).length ? (
+            {duration.prep || duration.cook || duration.rest ? (
               <DurationHeader>{`⏲`}</DurationHeader>
             ) : null}
           </PanelContainer>
