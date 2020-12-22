@@ -57,3 +57,27 @@ export const Default = () => (
 );
 
 export const NoImage = () => <Recipe {...recipeData} />;
+
+export const WithDuration = () => (
+  <Recipe
+    {...{
+      ...recipeData,
+      duration: { prep: "5 minutes", cook: "1 hour" },
+      serves: 0,
+    }}
+  />
+);
+
+export const WithServings = () => (
+  <Recipe {...{ ...recipeData, serves: 2, duration: { cook: "" } }} />
+);
+
+export const WithDurationAndServings = () => (
+  <Recipe
+    {...{
+      ...recipeData,
+      duration: { prep: "5 minutes", cook: "1 hour", rest: "30 minutes" },
+      serves: 2,
+    }}
+  />
+);

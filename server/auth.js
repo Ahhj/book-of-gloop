@@ -14,7 +14,7 @@ const checkJwt = jwt({
     jwksUri: `https://${domain}/.well-known/jwks.json`,
   }),
   issuer: `https://${domain}/`,
-  algorithm: ["RS256"],
+  algorithms: ["RS256"],
   audience,
 });
 

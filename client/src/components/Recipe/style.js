@@ -89,3 +89,7 @@ export const StepsContainer = styled.div`
 export const StyledMarkdown = styled(ReactMarkdown)`
   font-family: Gill Sans, Arial, sans-serif;
 `;
+
+export const SummaryPanelContainer = styled.div`
+  display: inline-block;
+`;
