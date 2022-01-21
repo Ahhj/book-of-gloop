@@ -1,5 +1,5 @@
 import React, { useState, useReducer, useCallback } from "react";
-import { useParams, useHistory } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { useGetWithAuth0, useMutateWithAuth0 } from "../../hooks/restful-auth0";
 import Recipe from "components/Recipe";
 import RecipeForm from "components/RecipeForm";
@@ -10,7 +10,7 @@ import { Button, ButtonContainer } from "./style";
  * Recipe or RecipeForm components
  */
 export default function RecipeContainer() {
-  let history = useHistory(); // For redirect
+  let history = useNavigate(); // For redirect
   let { recipeId } = useParams();
   const base = `/api/recipes`;
   const creating = recipeId === "new";

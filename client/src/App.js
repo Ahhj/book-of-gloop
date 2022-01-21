@@ -1,11 +1,23 @@
 import React from "react";
 import { useAuth0 } from "./react-auth0-spa";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Landing from "components/Landing";
-import PrivateRoute from "components/PrivateRoute";
+import RequireAuth from "components/RequireAuth";
 import RecipeListContainer from "components/RecipeListContainer";
 import RecipeContainer from "components/RecipeContainer";
 import { AuthNavBar } from "components/NavBar";
+
+const Logout = () => {
+  const { logout } = useAuth0();
+  logout({ returnTo: window.location.origin });
+  return <React.Fragment />;
+};
+
+const Login = () => {
+  const { loginWithRedirect } = useAuth0();
+  loginWithRedirect({ redirect_uri: `${window.location.origin}/` });
+  return <React.Fragment />;
+};
 
 function App() {
   const { loading } = useAuth0();
@@ -17,25 +29,37 @@ function App() {
       <Router>
         <div className="App">
           <AuthNavBar />
-          <Switch>
-            <PrivateRoute
-              path="/contents"
-              component={() => <RecipeListContainer />}
+          <Routes>
+            <Route path="/" element={<Landing />} />
+            <Route
+              path="contents"
+              element={
+                <RequireAuth>
+                  <RecipeListContainer />
+                </RequireAuth>
+              }
             />
-            <PrivateRoute
+            <Route
               key={"recipe-route"}
-              path={`/recipe/:recipeId`}
-              component={() => <RecipeContainer />}
+              path={`recipe/:recipeId`}
+              element={
+                <RequireAuth>
+                  <RecipeContainer />
+                </RequireAuth>
+              }
             />
-            <PrivateRoute
+            <Route
               key={"new-recipe-route"}
-              path={`/recipe/new`}
-              component={() => <RecipeContainer />}
+              path={`recipe/new`}
+              element={
+                <RequireAuth>
+                  <RecipeContainer />
+                </RequireAuth>
+              }
             />
-            <Route exact path={"/"}>
-              <Landing />
-            </Route>
-          </Switch>
+            <Route path={"login"} element={<Login />} />
+            <Route path={"logout"} element={<Logout />} />
+          </Routes>
         </div>
       </Router>
     );
