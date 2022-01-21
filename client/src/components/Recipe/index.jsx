@@ -50,15 +50,15 @@ export default function Recipe({
         </ImageContainer>
         <IngredientsContainer span={"0.3"}>
           <p />
-          <StyledMarkdown source={"### Ingredients"} />
-          <StyledMarkdown source={ingredients ? ingredients : ""} />
+          <StyledMarkdown children={"### Ingredients"} />
+          <StyledMarkdown children={ingredients ? ingredients : ""} />
         </IngredientsContainer>
       </Row>
       <Row>
         <StepsContainer span={`${image ? "1" : "0.7"}`}>
           <p />
-          <StyledMarkdown source={"### Steps"} />
-          <StyledMarkdown source={steps ? steps : ""} />
+          <StyledMarkdown children={"### Steps"} />
+          <StyledMarkdown children={steps ? steps : ""} />
         </StepsContainer>
       </Row>
     </BodyContainer>

@@ -1,13 +1,13 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
-import ImageDropZone from "components/ImageDropZone";
-import { Row } from "components/Grid";
+import ImageDropZone from "../../../ImageDropZone";
+import { Row } from "../../../Grid";
 import {
   ImageContainer,
   StepsContainer,
   IngredientsContainer,
   StyledMarkdown,
-} from "components/Recipe/style";
+} from "../../../Recipe/style";
 import ReactMde from "react-mde";
 
 import "./style.css";

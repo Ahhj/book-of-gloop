@@ -1,6 +1,6 @@
 import React, { useState, useCallback } from "react";
 import { useGetWithAuth0 } from "../../hooks/restful-auth0";
-import RecipeList from "components/RecipeList";
+import RecipeList from "../RecipeList";
 
 /**
  * Interacts with API to provide data for RecipeList component.
@@ -29,7 +29,7 @@ export default function RecipeListContainer() {
     <div>
       {loading ? (
         "Loading..."
-      ) : recipes.length === 0 ? (
+      ) : !recipes.length === 0 ? (
         "These are not the recipes you are looking for!"
       ) : (
         <RecipeList

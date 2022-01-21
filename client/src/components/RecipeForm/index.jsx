@@ -1,10 +1,7 @@
 import React, { useReducer, useCallback } from "react";
 import PropTypes from "prop-types";
 import { Button } from "./style";
-import {
-  BodyContainer,
-  ButtonContainer,
-} from "components/RecipeContainer/style";
+import { BodyContainer, ButtonContainer } from "../RecipeContainer/style";
 import RecipeFormBody from "./components/RecipeFormBody";
 import RecipeFormHeader from "./components/RecipeFormHeader";
 
