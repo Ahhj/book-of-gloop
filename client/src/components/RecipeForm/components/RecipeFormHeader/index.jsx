@@ -1,8 +1,8 @@
 import React, { useCallback } from "react";
 import PropTypes from "prop-types";
 import { TitleInput, SubTitleInput, DurationFieldInput } from "./style";
-import SummaryPanel from "components/Recipe/components/SummaryPanel";
-import { SummaryPanelContainer } from "components/Recipe/style";
+import SummaryPanel from "../../../Recipe/components/SummaryPanel";
+import { SummaryPanelContainer } from "../../../Recipe/style";
 
 /**
  * Component for the recipe form header.

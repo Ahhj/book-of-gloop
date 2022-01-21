@@ -1,11 +1,11 @@
 import React from "react";
 import { useAuth0 } from "./react-auth0-spa";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import Landing from "components/Landing";
-import RequireAuth from "components/RequireAuth";
-import RecipeListContainer from "components/RecipeListContainer";
-import RecipeContainer from "components/RecipeContainer";
-import { AuthNavBar } from "components/NavBar";
+import Landing from "./components/Landing";
+import RequireAuth from "./components/RequireAuth";
+import RecipeListContainer from "./components/RecipeListContainer";
+import RecipeContainer from "./components/RecipeContainer";
+import { AuthNavBar } from "./components/NavBar";
 
 const Logout = () => {
   const { logout } = useAuth0();

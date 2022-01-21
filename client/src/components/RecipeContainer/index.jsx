@@ -1,8 +1,8 @@
 import React, { useState, useReducer, useCallback } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { useGetWithAuth0, useMutateWithAuth0 } from "../../hooks/restful-auth0";
-import Recipe from "components/Recipe";
-import RecipeForm from "components/RecipeForm";
+import Recipe from "../Recipe";
+import RecipeForm from "../RecipeForm";
 import { Button, ButtonContainer } from "./style";
 
 /**
