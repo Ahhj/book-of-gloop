@@ -2,6 +2,22 @@
   "name": "book-of-gloop",
   "version": "1.0.0",
   "description": "Gloop recipe book",
+  "author": "",
+  "license": "ISC",
+  "engines": {
+    "node": "17.4.0",
+    "npm": "8.3.1"
+  },
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "express-jwt": "^6.0.0",
+    "express-jwt-authz": "^2.3.1",
+    "googleapis": "^92.0.0",
+    "jwks-rsa": "^1.8.0"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server/setupCredentials.js && node server",
@@ -11,21 +27,5 @@
   "cacheDirectories": [
     "node_modules",
     "client/node_modules"
-  ],
-  "author": "",
-  "license": "ISC",
-  "dependencies": {
-    "body-parser": "^1.19.0",
-    "cors": "^2.8.5",
-    "dotenv": "^8.2.0",
-    "express": "^4.17.1",
-    "express-jwt": "^6.0.0",
-    "express-jwt-authz": "^2.3.1",
-    "googleapis": "^39.2.0",
-    "jwks-rsa": "^1.8.0"
-  },
-  "engines": {
-    "npm": "6.13.7",
-    "node": "13.11.0"
-  }
+  ]
 }
