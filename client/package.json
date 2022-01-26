@@ -2,8 +2,8 @@
   "name": "book-of-gloop-ui",
   "version": "0.1.0",
   "engines": {
-    "node": "15.3.0",
-    "npm": "7.0.14"
+    "node": "17.4.0",
+    "npm": "8.3.1"
   },
   "private": true,
   "dependencies": {
@@ -13,6 +13,8 @@
     "formik": "^2.2.9",
     "formik-persist": "^1.1.0",
     "immutable": "^4.0.0",
+    "postcss": "^8.4.5",
+    "prop-types": "^15.8.1",
     "react": "^16.8.6",
     "react-dom": "^16.14.0",
     "react-dropzone": "^11.5.1",
@@ -20,7 +22,7 @@
     "react-markdown": "^8.0.0",
     "react-mde": "11.0.0",
     "react-router-dom": "^6.2.1",
-    "react-scripts": "^3.0.0",
+    "react-scripts": "^5.0.0",
     "react-uuid": "^1.0.2",
     "rebass": "^4.0.7",
     "restful-react": "^15.9.4",
@@ -28,7 +30,7 @@
     "styled-icons": "^10.45.0",
     "styled-system": "^5.1.5",
     "theme-ui": "^0.13.1",
-    "yargs-parser": "^9.0.2",
+    "yargs-parser": "^21.0.0",
     "yup": "^0.32.11"
   },
   "scripts": {
@@ -40,8 +42,19 @@
     "build-storybook": "build-storybook -s public"
   },
   "eslintConfig": {
-    "extends": "react-app"
+    "extends": "react-app",
+    "overrides": [
+      {
+        "files": [
+          "**/*.stories.*"
+        ],
+        "rules": {
+          "import/no-anonymous-default-export": "off"
+        }
+      }
+    ]
   },
+  "prettier": "@imaginary-cloud/prettier-config",
   "browserslist": [
     ">0.2%",
     "not dead",
@@ -50,11 +63,20 @@
   ],
   "proxy": "http://localhost:3000",
   "devDependencies": {
-    "@storybook/addon-actions": "6.1.21",
-    "@storybook/addon-essentials": "6.1.21",
-    "@storybook/addon-links": "6.1.21",
-    "@storybook/node-logger": "6.1.21",
-    "@storybook/preset-create-react-app": "3.1.6",
-    "@storybook/react": "6.1.21"
+    "@imaginary-cloud/prettier-config": "^1.0.0",
+    "@storybook/addon-actions": "^6.4.14",
+    "@storybook/addon-essentials": "^6.4.14",
+    "@storybook/addon-links": "^6.4.14",
+    "@storybook/builder-webpack5": "^6.4.14",
+    "@storybook/manager-webpack5": "^6.4.14",
+    "@storybook/node-logger": "^6.4.14",
+    "@storybook/preset-create-react-app": "^4.0.0",
+    "@storybook/react": "^6.4.14",
+    "eslint": "^8.7.0",
+    "eslint-plugin-import": "^2.25.4",
+    "eslint-plugin-jsx-a11y": "^6.5.1",
+    "eslint-plugin-react": "^7.28.0",
+    "eslint-plugin-react-hooks": "^4.3.0",
+    "webpack": "^5.67.0"
   }
 }
