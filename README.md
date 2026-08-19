@@ -10,7 +10,6 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 ## Prerequisites
 
-- Heroku CLI https://devcenter.heroku.com/articles/heroku-cli
 - NodeJs
 - React
 - Google Drive with API enabled https://developers.google.com/drive/api/v3/quickstart/nodejs
@@ -24,7 +23,7 @@ Additional variables are required for authentication (see below).
 
 # Deployment to Heroku
 
-The deployment to heroku is configured by the app.json file in the project root.
+The deployment to heroku was previously configured by the app.json file in the project root.
 
 Create an app on Heroku
 
@@ -39,6 +38,38 @@ Add the Auth0 addon through the Heroku portal. Add the required environmental va
 Push the app to Heroku:
 
 `git push heroku master`
+
+# Deployment to Railway or Render (Recommended)
+
+For modern deployment, use Railway or Render instead of Heroku.
+
+## Railway
+
+1. Go to [Railway.app](https://railway.app) and sign in with GitHub
+2. Click "New Project" → "Deploy from GitHub repo"
+3. Select the `book-of-gloop` repository and the `resurrection` branch
+4. Railway will auto-detect Node.js and deploy
+5. **Add Environment Variables** (see below for required variables)
+6. The app will be live at the provided URL
+
+## Render
+
+1. Go to [Render.com](https://render.com) and sign in
+2. Click "New" → "Web Service"
+3. Connect your GitHub repository, select `resurrection` branch
+4. Set **Build Command**: `npm install && npm run build`
+5. Set **Start Command**: `npm start`
+6. **Add Environment Variables** (see below for required variables)
+7. Click "Create Web Service"
+
+## Important Note for Auth0
+
+⚠️ **Auth0 environment variables must be set BEFORE the React app is built.** Since this app uses Create React App, the frontend environment variables (prefixed with `REACT_APP_`) are embedded at build time. This means:
+
+- On Railway/Render, set all `REACT_APP_*` variables in the project settings BEFORE deploying
+- The build will fail or auth will not work if these are missing during build
+- Required frontend variables: `REACT_APP_AUTH0_CLIENT_ID`, `REACT_APP_AUTH0_DOMAIN`, `REACT_APP_AUTH0_AUDIENCE`
+- Required backend variables: `AUTH0_CLIENT_ID`, `AUTH0_DOMAIN`, `AUTH0_AUDIENCE`, `GOOGLE_CONFIG`, `GOOGLE_DRIVE_FOLDER_ID`
 
 # Local development
 
@@ -94,9 +125,9 @@ TIP: to extract the contents of credentials.json to an environmental variable us
 
 ## Auth0
 
-Users are authenticated using the Heroku Auth0 addon (https://elements.heroku.com/addons/auth0). The user must login using Auth0 on the front end to interact with the app and the web API.
+Users are authenticated using Auth0. The user must login using Auth0 on the front end to interact with the app and the web API.
 
-The server and client need to following environmental variables to authenticate with Auth0 (note: for the react app these must be prepended with REACT*APP*):
+The server and client need the following environmental variables to authenticate with Auth0 (note: for the react app these must be prepended with REACT_APP_):
 
 - AUTH0_CLIENT_ID: id for the application obtained through the Auth0 portal
 - AUTH0_DOMAIN: id for the application domain obtained through the Auth0 portal
