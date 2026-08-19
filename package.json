@@ -13,14 +13,12 @@
     "cors": "^2.8.5",
     "dotenv": "^16.4.5",
     "express": "^4.19.2",
-    "express-jwt": "^7.7.0",
-    "express-jwt-authz": "^2.3.1",
-    "googleapis": "^134.0.0",
-    "jwks-rsa": "^3.0.0"
+    "google-auth-library": "^9.11.0",
+    "googleapis": "^134.0.0"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server/setupCredentials.js && node server",
+    "start": "node server/index.js",
     "build": "cd client && npm install && npm run build",
     "server": "node server"
   },

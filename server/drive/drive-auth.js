@@ -1,29 +1,29 @@
 const { google } = require("googleapis");
-const credentials = JSON.parse(process.env.GOOGLE_CONFIG);
 
-// Should these be in here? Feels like they should be higher
-const { client_email, private_key } = credentials;
-const scopes = ["https://www.googleapis.com/auth/drive"];
-const auth = new google.auth.JWT(client_email, null, private_key, scopes);
+// For user-based authentication, we'll use the OAuth2 client with the user's token
+// This is passed from the middleware
 
-async function getGoogleAuth() {
-  return authorize()
-    .then(() => auth)
-    .catch((error) => {
-      console.error(error);
-    });
+/**
+ * Get an authenticated Google Drive client using a user's OAuth token
+ * @param {string} accessToken - User's Google OAuth access token
+ * @returns {Promise<drive_v3.Drive>} - Authenticated Drive client
+ */
+async function getGoogleDriveClient(accessToken) {
+  const auth = new google.auth.OAuth2();
+  auth.setCredentials({ access_token: accessToken });
+  return google.drive({ version: "v3", auth });
 }
 
-async function authorize() {
-  return new Promise(function (resolve, reject) {
-    auth.authorize(function (error, tokens) {
-      if (error) {
-        reject(error);
-      } else {
-        resolve(tokens);
-      }
-    });
-  });
+/**
+ * Get Google OAuth client for token validation
+ * @returns {OAuth2Client} - OAuth2 client for token verification
+ */
+function getOAuthClient() {
+  return new google.auth.OAuth2(
+    process.env.GOOGLE_OAUTH_CLIENT_ID,
+    process.env.GOOGLE_OAUTH_CLIENT_SECRET,
+    process.env.GOOGLE_OAUTH_REDIRECT_URI || "http://localhost:3000"
+  );
 }
 
-module.exports = { getGoogleAuth };
+module.exports = { getGoogleDriveClient, getOAuthClient };

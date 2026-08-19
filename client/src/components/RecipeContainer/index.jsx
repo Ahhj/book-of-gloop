@@ -1,6 +1,6 @@
 import React, { useState, useReducer, useCallback } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import { useGetWithAuth0, useMutateWithAuth0 } from "../../hooks/restful-auth0";
+import { useGetWithGoogleAuth, useMutateWithGoogleAuth } from "../../hooks/restful-google";
 import Recipe from "../Recipe";
 import RecipeForm from "../RecipeForm";
 import { Button, ButtonContainer } from "./style";
@@ -25,7 +25,7 @@ export default function RecipeContainer() {
     }
   }, {});
 
-  const { data, loading } = useGetWithAuth0({
+  const { data, loading } = useGetWithGoogleAuth({
     base,
     path: "/download/",
     queryParams: { fileId: recipeId },
@@ -59,13 +59,13 @@ export default function RecipeContainer() {
     },
   });
 
-  const { mutate: update } = useMutateWithAuth0({
+  const { mutate: update } = useMutateWithGoogleAuth({
     base,
     path: "/update/",
     verb: "PUT",
   });
 
-  const { mutate: create, loading: uploading } = useMutateWithAuth0({
+  const { mutate: create, loading: uploading } = useMutateWithGoogleAuth({
     base,
     path: "/create/",
     verb: "POST",

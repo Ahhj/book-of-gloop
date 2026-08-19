@@ -1,5 +1,5 @@
 const express = require("express");
-const { checkJwt } = require("./auth");
+const { checkGoogleAuth } = require("./auth");
 const {
   getDriveFile,
   listDriveFiles,
@@ -11,22 +11,26 @@ const basePath = "/recipes";
 let router = express.Router();
 
 // GET: returns a list of the recipes in the recipes folder
-router.get(`${basePath}/list`, checkJwt, (req, res) => {
+router.get(`${basePath}/list`, checkGoogleAuth, async (req, res) => {
   const { fullTextContains } = req.query;
-  listDriveFiles(fullTextContains)
-    .then(({ data }) => {
-      const body = { recipes: data.files };
-      sendSuccessResponse(body, res);
-    })
-    .catch((error) => sendErrorResponse(error, res));
+  try {
+    const result = await listDriveFiles(fullTextContains, req.googleToken);
+    const body = { recipes: result.data.files };
+    sendSuccessResponse(body, res);
+  } catch (error) {
+    sendErrorResponse(error, res);
+  }
 });
 
 // GET: returns data for recipe with fileId
-router.get(`${basePath}/download`, checkJwt, (req, res) => {
+router.get(`${basePath}/download`, checkGoogleAuth, async (req, res) => {
   const { fileId } = req.query;
-  getDriveFile(fileId)
-    .then(({ data }) => sendSuccessResponse(data, res))
-    .catch((error) => sendErrorResponse(error, res));
+  try {
+    const result = await getDriveFile(fileId, req.googleToken);
+    sendSuccessResponse(result.data, res);
+  } catch (error) {
+    sendErrorResponse(error, res);
+  }
 });
 
 // POST: create a new recipe with filename given by title,
@@ -34,16 +38,17 @@ router.get(`${basePath}/download`, checkJwt, (req, res) => {
 router.post(
   `${basePath}/create`,
   express.json({ type: "application/json" }),
-  checkJwt,
-  (req, res) => {
+  checkGoogleAuth,
+  async (req, res) => {
     const { data } = req.body;
     const fileName = `${data.title}.json`;
-    createDriveFile(fileName, data)
-      .then(({ data }) => {
-        const body = { fileId: data.id };
-        sendSuccessResponse(body, res);
-      })
-      .catch((error) => sendErrorResponse(error, res));
+    try {
+      const result = await createDriveFile(fileName, data, req.googleToken);
+      const body = { fileId: result.data.id };
+      sendSuccessResponse(body, res);
+    } catch (error) {
+      sendErrorResponse(error, res);
+    }
   }
 );
 
@@ -51,13 +56,16 @@ router.post(
 router.put(
   `${basePath}/update`,
   express.json({ type: "application/json" }),
-  checkJwt,
-  (req, res) => {
+  checkGoogleAuth,
+  async (req, res) => {
     const { fileId, data } = req.body;
     const fileName = `${data.title}.json`;
-    updateDriveFile(fileId, fileName, data)
-      .then(() => sendSuccessResponse(null, res))
-      .catch((error) => sendErrorResponse(error, res));
+    try {
+      await updateDriveFile(fileId, fileName, data, req.googleToken);
+      sendSuccessResponse(null, res);
+    } catch (error) {
+      sendErrorResponse(error, res);
+    }
   }
 );
 
@@ -67,7 +75,10 @@ function sendSuccessResponse(body, res) {
 
 function sendErrorResponse(error, res) {
   console.error(error);
-  res.status(400).send({ error: error.body });
+  const message = error.response?.data?.error?.message || 
+                  error.message || 
+                  "An unknown error occurred";
+  res.status(error.code || 400).send({ error: message });
 }
 
 module.exports = router;

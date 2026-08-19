@@ -2,7 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 import App from "./App";
 import * as serviceWorker from "./serviceWorker";
-import { Auth0Provider } from "./react-auth0-spa";
+import { GoogleOAuthProvider } from "./react-google-oauth";
 import { createGlobalStyle } from "styled-components";
 
 const GlobalStyle = createGlobalStyle`
@@ -30,17 +30,13 @@ const GlobalStyle = createGlobalStyle`
 `;
 
 ReactDOM.render(
-  <Auth0Provider
-    domain={process.env.REACT_APP_AUTH0_DOMAIN}
-    client_id={process.env.REACT_APP_AUTH0_CLIENT_ID}
-    redirect_uri={window.location.origin}
-    audience={process.env.REACT_APP_AUTH0_AUDIENCE}
-    useRefreshTokens={true}
-    cacheLocation={"localstorage"}
+  <GoogleOAuthProvider
+    clientId={process.env.REACT_APP_GOOGLE_OAUTH_CLIENT_ID}
+    scope="email profile https://www.googleapis.com/auth/drive"
   >
     <GlobalStyle />
     <App />
-  </Auth0Provider>,
+  </GoogleOAuthProvider>,
   document.getElementById("root")
 );
 

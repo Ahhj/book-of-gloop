@@ -1,5 +1,5 @@
 import React from "react";
-import { useAuth0 } from "./react-auth0-spa";
+import { useGoogleOAuth } from "./react-google-oauth";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Landing from "./components/Landing";
 import RequireAuth from "./components/RequireAuth";
@@ -8,19 +8,23 @@ import RecipeContainer from "./components/RecipeContainer";
 import { AuthNavBar } from "./components/NavBar";
 
 const Logout = () => {
-  const { logout } = useAuth0();
-  logout({ returnTo: window.location.origin });
+  const { logout } = useGoogleOAuth();
+  logout().then(() => {
+    window.location.href = "/";
+  });
   return <React.Fragment />;
 };
 
 const Login = () => {
-  const { loginWithRedirect } = useAuth0();
-  loginWithRedirect({ redirect_uri: `${window.location.origin}/` });
+  const { login } = useGoogleOAuth();
+  login().then(() => {
+    window.location.href = "/";
+  });
   return <React.Fragment />;
 };
 
 function App() {
-  const { loading } = useAuth0();
+  const { loading, isAuthenticated } = useGoogleOAuth();
 
   if (loading) {
     return <div> Loading... </div>;
@@ -28,7 +32,7 @@ function App() {
     return (
       <Router>
         <div className="App">
-          <AuthNavBar />
+          <AuthNavBar isAuthenticated={isAuthenticated} />
           <Routes>
             <Route path="/" element={<Landing />} />
             <Route

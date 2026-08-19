@@ -1,5 +1,5 @@
 import React, { useState, useCallback } from "react";
-import { useGetWithAuth0 } from "../../hooks/restful-auth0";
+import { useGetWithGoogleAuth } from "../../hooks/restful-google";
 import RecipeList from "../RecipeList";
 
 /**
@@ -9,7 +9,7 @@ export default function RecipeListContainer() {
   const [recipes, setRecipes] = useState([]);
   const [filter, setFilter] = useState("*");
 
-  const { loading } = useGetWithAuth0({
+  const { loading } = useGetWithGoogleAuth({
     base: `/api/recipes`,
     path: "/list/",
     lazy: false,
@@ -29,7 +29,7 @@ export default function RecipeListContainer() {
     <div>
       {loading ? (
         "Loading..."
-      ) : !recipes.length === 0 ? (
+      ) : !recipes.length ? (
         "These are not the recipes you are looking for!"
       ) : (
         <RecipeList

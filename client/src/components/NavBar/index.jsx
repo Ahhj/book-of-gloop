@@ -1,5 +1,5 @@
 import React from "react";
-import { useAuth0 } from "../../react-auth0-spa";
+import { useGoogleOAuth } from "../../react-google-oauth";
 
 import { NavItem, NavItemContainer, NavBarSpacer } from "./style";
 
@@ -21,7 +21,7 @@ export function NavBar({ items }) {
 }
 
 export function AuthNavBar() {
-  const { isAuthenticated } = useAuth0();
+  const { isAuthenticated } = useGoogleOAuth();
   let navItems = [
     {
       to: !isAuthenticated ? "/login" : "/logout",

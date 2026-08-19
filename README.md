@@ -10,14 +10,14 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 ## Prerequisites
 
-- NodeJs
+- NodeJs (>=20.0.0)
 - React
-- Google Drive with API enabled https://developers.google.com/drive/api/v3/quickstart/nodejs
-- Auth0 (see Authentication section)
+- Google Cloud Project with OAuth and Drive API enabled
+- Google Drive folder for storing recipes
 
 ## Environment
 
-The application data will be directed to the folder on Google Drive with folderId given by the environmental variable GOOGLE_DRIVE_FOLDER_ID, which can be retrieved by inspected the URL with the folder open in the browser.
+The application data will be directed to the folder on Google Drive with folderId given by the environmental variable GOOGLE_DRIVE_FOLDER_ID, which can be retrieved by inspecting the URL with the folder open in the browser.
 
 Additional variables are required for authentication (see below).
 
@@ -32,8 +32,6 @@ Create an app on Heroku
 Add the Heroku apps as a git remote:
 
 `heroku git:remote -a book-of-gloop`
-
-Add the Auth0 addon through the Heroku portal. Add the required environmental variables for authentication to the app on Heroku (see below). Note: environmental variables must be set on the app before the push (the variables are passed to the React app at build time, so they cannot be set after the build.)
 
 Push the app to Heroku:
 
@@ -62,14 +60,14 @@ For modern deployment, use Railway or Render instead of Heroku.
 6. **Add Environment Variables** (see below for required variables)
 7. Click "Create Web Service"
 
-## Important Note for Auth0
+## Important Note for Authentication
 
-⚠️ **Auth0 environment variables must be set BEFORE the React app is built.** Since this app uses Create React App, the frontend environment variables (prefixed with `REACT_APP_`) are embedded at build time. This means:
+⚠️ **Google OAuth environment variables must be set BEFORE the React app is built.** Since this app uses Create React App, the frontend environment variables (prefixed with `REACT_APP_*`) are embedded at build time. This means:
 
 - On Railway/Render, set all `REACT_APP_*` variables in the project settings BEFORE deploying
 - The build will fail or auth will not work if these are missing during build
-- Required frontend variables: `REACT_APP_AUTH0_CLIENT_ID`, `REACT_APP_AUTH0_DOMAIN`, `REACT_APP_AUTH0_AUDIENCE`
-- Required backend variables: `AUTH0_CLIENT_ID`, `AUTH0_DOMAIN`, `AUTH0_AUDIENCE`, `GOOGLE_CONFIG`, `GOOGLE_DRIVE_FOLDER_ID`
+- Required frontend variables: `REACT_APP_GOOGLE_OAUTH_CLIENT_ID`
+- Required backend variables: `GOOGLE_OAUTH_CLIENT_ID`, `GOOGLE_OAUTH_CLIENT_SECRET`, `GOOGLE_DRIVE_FOLDER_ID`
 
 # Local development
 
@@ -89,7 +87,7 @@ The server will serve the static build at client/build. To create a new build:
 
 `cd client && npm run build`
 
-Note: Google Drive data not be accessible without the server running
+Note: Google Drive data will not be accessible without the server running
 
 ## Server
 
@@ -103,34 +101,94 @@ To start the server (with auto-refresh):
 
 The API implements the following endpoints:
 
-- GET /api/list: list the files by name and their ids for download
-- GET /api/download: download the data for a given file id
-- POST /api/create: create a new file given a name and data
-- PUT /api/update: update an existing file
+- GET /api/recipes/list: list the files by name and their ids for download
+- GET /api/recipes/download: download the data for a given file id
+- POST /api/recipes/create: create a new file given a name and data
+- PUT /api/recipes/update: update an existing file
 
 # Authentication
 
-## Google Drive API
+## Google OAuth 2.0
 
-The server interacts with Google Drive using service account credentials (for more details see https://developers.google.com/drive/api/v3/quickstart/nodejs). Note: folders must be shared with the service account to enable access via the Google Drive API.
+The app now uses Google OAuth 2.0 for authentication. Users sign in with their Google accounts, and access to recipes is controlled by Google Drive folder sharing.
 
-The server requires the following environmental variables to authenticate with Google Drive:
+### Setup Instructions
 
-- GOOGLE_APPLICATION_CREDENTIALS: the path to the credentials file
-- GOOGLE_CONFIG: a string holding the credentials json object
+1. **Create a Google Cloud Project**
+   - Go to [Google Cloud Console](https://console.cloud.google.com/)
+   - Create a new project or select an existing one
 
-TIP: to extract the contents of credentials.json to an environmental variable use
+2. **Enable APIs**
+   - Enable the **Google Drive API**
+   - Enable the **Google People API** (for user profile info)
 
-`GOOGLE_CONFIG="$(< server/credentials.json)"`
+3. **Create OAuth 2.0 Credentials**
+   - Go to **APIs & Services** → **Credentials**
+   - Click **Create Credentials** → **OAuth client ID**
+   - Select **Web application** as the application type
+   - Add authorized JavaScript origins:
+     - For local development: `http://localhost:3000`
+     - For production: your deployed app URL (e.g., `https://book-of-gloop.up.railway.app`)
+   - Add authorized redirect URIs:
+     - For local development: `http://localhost:3000`
+     - For production: your deployed app URL
+   - Copy the **Client ID** and **Client Secret**
 
-## Auth0
+4. **Share the Google Drive Folder**
+   - Open your Google Drive folder in the browser
+   - Click **Share** and add the email addresses of users who should have access
+   - Users must be signed in with the same Google account that has access to the folder
 
-Users are authenticated using Auth0. The user must login using Auth0 on the front end to interact with the app and the web API.
+### Required Environment Variables
 
-The server and client need the following environmental variables to authenticate with Auth0 (note: for the react app these must be prepended with REACT_APP_):
+#### Frontend (prefixed with REACT_APP_)
+- `REACT_APP_GOOGLE_OAUTH_CLIENT_ID`: Your Google OAuth Client ID
 
-- AUTH0_CLIENT_ID: id for the application obtained through the Auth0 portal
-- AUTH0_DOMAIN: id for the application domain obtained through the Auth0 portal
-- AUTH0_AUDIENCE: identifier for the API configured through the Auth0 portal.
+#### Backend
+- `GOOGLE_OAUTH_CLIENT_ID`: Your Google OAuth Client ID (same as frontend)
+- `GOOGLE_OAUTH_CLIENT_SECRET`: Your Google OAuth Client Secret
+- `GOOGLE_DRIVE_FOLDER_ID`: The ID of your Google Drive folder (from the URL)
 
-For more details on getting started with Auth0 for a React/Node application, see https://auth0.com/blog/react-tutorial-building-and-securing-your-first-app/.
+### How Access Control Works
+
+1. User signs in with Google on the frontend
+2. Frontend receives a Google OAuth token
+3. Frontend sends this token with each API request in the `Authorization: Bearer <token>` header
+4. Backend validates the token using Google's API
+5. Backend uses the user's token to access Google Drive
+6. **Google Drive enforces permissions** - if the user's Google account doesn't have access to the folder, the API call will fail with a 403 error
+
+This means you control access by:
+- Sharing the Google Drive folder with specific Google accounts
+- Users can only access recipes if their Google account has access to the folder
+- No user management needed in the app itself
+
+# Google Drive Setup
+
+## Service Account (Legacy - No Longer Used)
+
+The app previously used a service account, but now uses user credentials via OAuth. The service account approach is no longer needed.
+
+## User Credentials (Current)
+
+The app now uses the signed-in user's credentials to access Google Drive. This means:
+- Each user accesses Google Drive as themselves
+- Folder sharing in Google Drive controls who can read/write recipes
+- No need to manage users in the app
+
+# Migration from Auth0
+
+If you were previously using Auth0:
+
+1. **Remove Auth0 environment variables**
+   - Remove `REACT_APP_AUTH0_*`, `AUTH0_*` variables
+
+2. **Add Google OAuth environment variables**
+   - Add `REACT_APP_GOOGLE_OAUTH_CLIENT_ID` (frontend)
+   - Add `GOOGLE_OAUTH_CLIENT_ID` and `GOOGLE_OAUTH_CLIENT_SECRET` (backend)
+
+3. **Share the Google Drive folder**
+   - Ensure all users have access to the folder via their Google accounts
+
+4. **Redeploy**
+   - The app will now use Google OAuth instead of Auth0
