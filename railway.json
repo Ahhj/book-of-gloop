@@ -1,0 +1,8 @@
+{
+  "name": "book-of-gloop",
+  "description": "Recipe book application",
+  "variables": {
+    "GOOGLE_DRIVE_FOLDER_ID": "1l6kXQ7exsaFIcaZlqiQgm7GCXEq9QWKw",
+    "PORT": "3000"
+  }
+}
